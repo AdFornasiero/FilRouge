@@ -33,8 +33,32 @@ class Products extends CI_Controller
 		$data['suppliersList'] = $this->Suppliers_model->selectSuppliers();
 		$data['categoriesList'] = $this->Categories_model->selectCategories();
 
-		$this->load->view('header', $data);
-		$this->load->view('productAdd', $data);
+
+		
+
+		if($this->input->post()){
+
+			if ($this->form_validation->run() == FALSE)
+	        {
+	            $this->load->view('header', $data);
+				$this->load->view('productAdd', $data);
+	        }
+	       else{
+
+
+	       		echo 'c bn';
+	        }
+
+		}
+		else{
+			$this->load->view('header', $data);
+			$this->load->view('productAdd', $data);
+		}
+
+
+
+
+
 	}
 
 
