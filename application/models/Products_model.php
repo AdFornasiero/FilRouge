@@ -35,7 +35,7 @@ class Products_model extends CI_Model
 		$this->db->order_by('maker', 'ASC');
 		$makers = $this->db->get('products')->result();
 		foreach($makers as $maker){
-			array_push($makersList, $maker->maker);
+			$makersList[$maker->maker] = $maker->maker;
 		}
 		return $makersList;
 	}

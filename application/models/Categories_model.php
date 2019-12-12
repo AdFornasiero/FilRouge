@@ -10,7 +10,7 @@ class Categories_model extends CI_Model
         $this->db->select('categoryID, label');
         $categories = $this->db->get('categories')->result();
         foreach($categories as $category){
-            $categoriesList[$category->categoryID] = $category->name;
+            $categoriesList[$category->categoryID] = $category->label;
         }
         return $categoriesList;
     }

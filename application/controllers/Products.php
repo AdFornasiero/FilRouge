@@ -10,8 +10,14 @@ class Products extends CI_Controller
 
 		$this->load->view('header', $data);
 		$this->load->view('productsList',$data);
-
+		$this->load->view('footer');
 	}
+
+	public function search(){
+	
+	}
+
+
 
 	public function displayOne($id){
 		$this->output->enable_profiler(TRUE);
@@ -25,6 +31,7 @@ class Products extends CI_Controller
 
 		$this->load->view('header', $data);
 		$this->load->view('productDetail',$data);
+		$this->load->view('footer');
 	}
 
 	public function add(){
@@ -34,25 +41,25 @@ class Products extends CI_Controller
 		$data['categoriesList'] = $this->Categories_model->selectCategories();
 
 
-		
-
+	
 		if($this->input->post()){
 
 			if ($this->form_validation->run() == FALSE)
 	        {
 	            $this->load->view('header', $data);
 				$this->load->view('productAdd', $data);
+				$this->load->view('footer');
 	        }
 	       else{
-
-
-	       		echo 'c bn';
+	       		$params = $this->input->post();
+	       		$this->Products_model->add($params);
 	        }
 
 		}
 		else{
 			$this->load->view('header', $data);
 			$this->load->view('productAdd', $data);
+			$this->load->view('footer');
 		}
 
 
