@@ -1,12 +1,12 @@
 /* Style the tab */
-.tab {
+.tabs {
   overflow: hidden;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
 }
 
 /* Style the buttons that are used to open the tab content */
-.tab button {
+.tabs button {
   background-color: inherit;
   float: left;
   border: none;
@@ -17,12 +17,12 @@
 }
 
 /* Change background color of buttons on hover */
-.tab button:hover {
+.tabs button:hover {
   background-color: #ddd;
 }
 
 /* Create an active/current tablink class */
-.tab button.active {
+.tabs button.active {
   background-color: #ccc;
 }
 
@@ -32,8 +32,4 @@
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
-}
-
-#signup{
-    display: block;
 }

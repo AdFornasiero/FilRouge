@@ -1,6 +1,8 @@
 <div class="max-w-lg mx-auto mt-8">
 
-	<div class="tab flex rounded">
+	<?= validation_errors() ?>
+
+	<div class="tabs flex rounded">
 	  	<button class="tablinks w-1/2" id="signinbtn">Se connecter</button>
 	  	<button class="tablinks w-1/2 active" id="signupbtn">S'inscrire</button>
 	</div>
@@ -29,30 +31,30 @@
 
 			<div class="mt-2">	
 			 	<label class="block text-gray-500 font-semibold ml-2" for="email">Votre adresse email</label>
-				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded mt-1" type="text" name="email" id="email">
+				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded mt-1" type="text" name="email" id="email"  value="<?= set_value('email') ?>">
 			</div>
 
 			<div class="mt-2">	
 			 	<label class="block text-gray-500 font-semibold ml-2" for="login">Choisissez un nom d'utilisateur</label>
-				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded mt-1" type="text" name="login" id="login">
+				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded mt-1" type="text" name="login" id="login"  value="<?= set_value('login') ?>">
 			</div>
 	  		
 	  		<div class="flex mt-2">
 				<div class="w-1/2 mr-1">	
 				 	<label class="block text-gray-500 font-semibold ml-2" for="login">Votre prénom</label>
-					<input class="w-full bg-gray-200 border-2 border-gray-300 rounded mt-1" type="text" name="firstname" id="firstname">
+					<input class="w-full bg-gray-200 border-2 border-gray-300 rounded mt-1" type="text" name="firstname" id="firstname"  value="<?= set_value('firstname') ?>">
 				</div>
 				<div class="w-1/2 ml-1">	
 				 	<label class="block text-gray-500 font-semibold ml-2" for="login">Votre nom</label>
-					<input class="w-full bg-gray-200 border-2 border-gray-300 rounded mt-1" type="text" name="lastname" id="lastname">
+					<input class="w-full bg-gray-200 border-2 border-gray-300 rounded mt-1" type="text" name="lastname" id="lastname"  value="<?= set_value('lastname') ?>">
 				</div>
 			</div>
 
 			<div class="mt-5 mb-2 flex">	
 			 	<label class="w-1/2 text-gray-500 font-semibold ml-2" for="birthdate">Votre date de naissance</label>
-				<input class="w-12 bg-gray-200 border-2 border-gray-300 rounded mr-1" type="text" name="birthdateday" id="birthdateday" maxlength="2" min="1" max="31" placeholder="JJ">
-				<input class="w-12 bg-gray-200 border-2 border-gray-300 rounded mr-1" type="text" name="birthdatemonth" id="birthdatemonth" maxlength="2" min="1" max="12" placeholder="MM">
-				<input class="w-16 bg-gray-200 border-2 border-gray-300 rounded" type="text" name="birthdateyear" id="birthdateyear" maxlength="4" min="1900" max="2020" placeholder="AAAA">
+				<input class="w-12 bg-gray-200 border-2 border-gray-300 rounded mr-1" type="text" name="birthdateday" id="birthdateday" maxlength="2" min="1" max="31" placeholder="JJ"  value="<?= set_value('birthdateday') ?>">
+				<input class="w-12 bg-gray-200 border-2 border-gray-300 rounded mr-1" type="text" name="birthdatemonth" id="birthdatemonth" maxlength="2" min="1" max="12" placeholder="MM"  value="<?= set_value('birthdatemonth') ?>">
+				<input class="w-16 bg-gray-200 border-2 border-gray-300 rounded" type="text" name="birthdateyear" id="birthdateyear" maxlength="4" min="1900" max="2020" placeholder="AAAA"  value="<?= set_value('birthdateyear') ?>">
 			</div>
 
 			<div class="mt-2 flex">	
@@ -62,7 +64,7 @@
 				</div>
 				<div class="w-1/2">	
 				 	<label class="block text-gray-500 font-semibold ml-2" for="phone">Votre n° de téléphone</label>
-					<input class="w-full bg-gray-200 border-2 border-gray-300 rounded ml-1 mt-1" type="text" name="phone" id="phone">
+					<input class="w-full bg-gray-200 border-2 border-gray-300 rounded ml-1 mt-1" type="text" name="phone" id="phone"  value="<?= set_value('phone') ?>">
 				</div>
 			</div>
 
@@ -79,7 +81,7 @@
 
 			<div class="mt-2 text-right">	
 			 	<label class="text-gray-500 font-semibold mr-2" for="pro">Je suis un professionnel</label>
-				<input class="rounded" type="checkbox" name="pro" id="pro">
+				<input class="rounded" type="checkbox" name="pro" id="pro" <?= (set_value('pro') ? 'checked' : '') ?>>
 			</div>
 
 			<?= form_submit('', 'Connexion', array('class' => 'mx-auto bg-gray-200 px-2 py-1 border-2 border-gray-300 rounded mt-4')); ?>

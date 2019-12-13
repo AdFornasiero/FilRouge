@@ -3,13 +3,18 @@
 
 $referencePattern = '/^[\w\-]{6,12}$/'; // Entre 3 et 10 lettres, chiffres, tirets ou underscore
 
-$labelPattern = '/^[0-9A-Za-z-áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ ]{2,24}$/'; // 2 à 24 chiffres ou lettres (+accents)(+tirets)
+$labelPattern = '/^[0-9A-Za-z-_áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ ]{2,24}$/'; // 2 à 24 chiffres ou lettres (+accents)(+tirets/underscores/espaces)
 
-$descriptionPattern = '/^[0-9A-Za-záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ \.,?;:!§=+\-_°@()&\"\'\[\]\#\~²]{0,1030}$/'; // Lettres, mots, chiffres (max 1030)
+$globalPattern = '/^[0-9A-Za-záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ \.,?;:!§=+\-_°@()&\"\'\[\]\#\~²]{0,1030}$/'; // Lettres, mots, chiffres (max 1030)
 
 $pricePattern = '/^[0-9]{0,6}((,|\.)[0-9]{1,2})?$/'; // Chiffres, éventuellement suivis de d'un point ou d'une virgule et 2 chiffres
 
 $stockPattern = '/^[0-9]{1,9}$/'; // 0 à 10 chiffres uniquement
+
+$loginPattern = '/^[0-9A-Za-z-_áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ ]{1,64}$/';
+
+$namePattern = '/^[0-9A-Za-záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ -_\']{1,64}$/';
+
 
 
 
@@ -62,7 +67,7 @@ $config = array(
 				'field' => 'description',
 				'label' => 'Description',
 				'rules' => array('max_length[1024]',
-								'regex_match['.$descriptionPattern.']'),
+								'regex_match['.$globalPattern.']'),
 				'errors' => array('max_length' => 'La description ne peut pas excéder 1024 caractères',
 								'regex_match' => 'Des caractères non-acceptés ont été detectés dans la description')
 		),
@@ -72,7 +77,7 @@ $config = array(
 				'field' => 'maker',
 				'label' => 'Fabriquant',
 				'rules' => array('required',
-								'regex_match['.$descriptionPattern.']',
+								'regex_match['.$globalPattern.']',
 								'max_length[64]'),
 				'errors' => array('required' => 'Sélectionnez le fabriquant, ou entrez-le manuellement',
 								'regex_match' => 'Sélectionnez le fabriquant, ou entrez-le manuellement',
@@ -124,97 +129,102 @@ $config = array(
 								'valid_email'),
 				'errors' => array('required' => 'Entrez votre adresse email',
 								'valid_email' => 'Entrez une adresse email valide')
-
 		),
 		array(
 				'field' => 'login',
 				'label' => 'Nom d\'utilisateur',
 				'rules' => array('required',
-								'integer'),
-				'errors' => array('required' => 'Selectionnez le fournisseur',
-								'integer' => 'Selectionnez le fournisseur')
-
+								'regex_match['.$loginPattern.']'),
+				'errors' => array('required' => 'Entrez un nom d\'utilisateur',
+								'regex_match' => 'Merci de n\'utiliser que des lettres, des chiffres ou des tirets')
 		),
 		array(
 				'field' => 'firstname',
 				'label' => 'Prénom',
 				'rules' => array('required',
-								'integer'),
-				'errors' => array('required' => 'Selectionnez le fournisseur',
-								'integer' => 'Selectionnez le fournisseur')
-
+								'regex_match['.$namePattern.']'),
+				'errors' => array('required' => 'Entrez votre prénom',
+								'regex_match' => 'Merci d\'entrez votre vrai prénom')
 		),
 		array(
 				'field' => 'lastname',
 				'label' => 'Nom',
 				'rules' => array('required',
-								'integer'),
-				'errors' => array('required' => 'Selectionnez le fournisseur',
-								'integer' => 'Selectionnez le fournisseur')
-
+								'regex_match['.$namePattern.']'),
+				'errors' => array('required' => 'Entrez votre nom',
+								'regex_match' => 'Merci d\'entrez votre vrai nom')
 		),
 		array(
 				'field' => 'birthdateday',
 				'label' => 'Jour de naissance',
 				'rules' => array('required',
-								'integer'),
-				'errors' => array('required' => 'Selectionnez le fournisseur',
-								'integer' => 'Selectionnez le fournisseur')
-
+								'is_natural_not_zero',
+								'less_than_or_equal[31]'),
+				'errors' => array('required' => 'Entrez votre jour de naissance',
+								'is_natural_not_zero' => 'Entrez votre vrai jour de naissance',
+								'less_than' => 'Entrez votre vrai jour de naissance')
 		),
 		array(
 				'field' => 'birthdatemonth',
 				'label' => 'Mois de naissance',
 				'rules' => array('required',
-								'integer'),
-				'errors' => array('required' => 'Selectionnez le fournisseur',
-								'integer' => 'Selectionnez le fournisseur')
-
+								'is_natural_not_zero',
+								'less_than_or_equal[12]'),
+				'errors' => array('required' => 'Entrez votre mois de naissance',
+								'is_natural_not_zero' => 'Entrez votre vrai mois de naissance',
+								'less_than_or_equal' => 'Entrez votre vrai mois de naissance')
 		),
 		array(
 				'field' => 'birthdateyear',
 				'label' => 'Année de naissance',
 				'rules' => array('required',
-								'integer'),
-				'errors' => array('required' => 'Selectionnez le fournisseur',
-								'integer' => 'Selectionnez le fournisseur')
-
+								'is_natural',
+								'greater_than[1900]',
+								'less_than[2020]'),
+				'errors' => array('required' => 'Entrez votre année de naissance',
+								'is_natural' => 'Entrez votre vraie année de naissance',
+								'greater_than' => 'Entrez votre vraie année de naissance',
+								'less_than' => 'Entrez votre vraie année de naissance')
 		),
 		array(
 				'field' => 'country',
 				'label' => 'country',
 				'rules' => array('required',
-								'integer'),
-				'errors' => array('required' => 'Selectionnez le fournisseur',
-								'integer' => 'Selectionnez le fournisseur')
-
+								'alpha',
+								'exact_length[2]'),
+				'errors' => array('required' => 'Sélectionnez votre pays',
+								'alpha' => 'Sélectionnez votre pays',
+								'exact_length' => 'Sélectionnez votre pays'),
 		),
 		array(
 				'field' => 'phone',
 				'label' => 'phone',
-				'rules' => array('required',
-								'integer'),
-				'errors' => array('required' => 'Selectionnez le fournisseur',
-								'integer' => 'Selectionnez le fournisseur')
-
+				'rules' => array('integer',
+								'max_length[16]'),
+				'errors' => array('integer' => 'Entrez un numéro de téléphone valide',
+								'max_length' => 'Entrez un numéro de téléphone valide')
 		),
 		array(
 				'field' => 'password',
 				'label' => 'password',
 				'rules' => array('required',
-								'integer'),
-				'errors' => array('required' => 'Selectionnez le fournisseur',
-								'integer' => 'Selectionnez le fournisseur')
-
+								'regex_match['.$globalPattern.']',
+								'min_length[6]',
+								'max_length[32]'),
+				'errors' => array('required' => 'Choisissez un mot de passe',
+								'regex_match' => 'Caractères non-autorisés',
+								'min_length' => 'Votre mot de passe doit être d\'au moins 6 caractères',
+								'max_length' => 'Votre mot de passe ne peut dépasser 32 caractères')
 		),
 		array(
 				'field' => 'passwordConfirm',
 				'label' => 'passwordConfirm',
 				'rules' => array('required',
-								'integer'),
-				'errors' => array('required' => 'Selectionnez le fournisseur',
-								'integer' => 'Selectionnez le fournisseur')
-
+								'regex_match['.$globalPattern.']',
+								'matches[password]'),
+				'errors' => array('required' => 'Confirmez votre mot de passe',
+								'regex_match' => 'Caractères non-autorisés',
+								'matches' => 'Les mots de passe ne sont pas identiques')
 		)
 
 	),
