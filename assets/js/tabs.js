@@ -1,28 +1,40 @@
 $(document).ready(function(){ 
 
+
     $('#signinbtn').click(function(){
 
-        $("#signup").css("display","none");
+        $("#signup").removeClass("active");
         $("#signupbtn").removeClass("active");
-        $('#signin').css("display","block");   
+
+        $('#signin').addClass("active");   
         $("#signinbtn").addClass("active");
        // $("body").css("background-color", "blue");
-
 
     });
 
     $('#signupbtn').click(function(){
 
-        $("#signin").css("display","none");
+        $("#signin").removeClass("active");
         $("#signinbtn").removeClass("active");
-        $('#signup').css("display","block");   
+
+        $('#signup').addClass("active");   
         $("#signupbtn").addClass("active");
         //$("body").css("background-color", "purple");
 
 
+            // Adjust dropdown size
+        $("#country").width($("#firstname").width());
+        $("#country").height($("#firstname").height());
+        $("#phone").width($("#firstname").width());
     });
 
 
-    //$("#country").width($('#phone').width());
-    $("#signupbtn").trigger("click");
+        // Change initial displayed form
+    if($("#signinbtn").hasClass("active")){
+        $("#signinbtn").trigger("click");
+    }
+    else{
+        $("#signupbtn").trigger("click");
+    }
+
 });

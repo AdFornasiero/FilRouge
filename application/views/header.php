@@ -34,7 +34,7 @@
 			    </div>
 			</div>
 			<div>
-				<a href="<?= site_url('Users/signin') ?>"><i class="fas fa-user text-white text-lg"></i></a>
+				<a href="<?= site_url('Users/sign') ?>"><i class="fas fa-user text-white text-lg"></i></a>
 			</div>
 		</nav>
 

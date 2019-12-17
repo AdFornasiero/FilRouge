@@ -120,23 +120,31 @@ $config = array(
 	),
 
 
-	'users/signin' => array(
+	'signup' => array(
 
 		array(
 				'field' => 'email',
 				'label' => 'Adresse email',
 				'rules' => array('required',
-								'valid_email'),
+								'valid_email',
+								'is_unique[Users.email]'),
 				'errors' => array('required' => 'Entrez votre adresse email',
-								'valid_email' => 'Entrez une adresse email valide')
+								'valid_email' => 'Entrez une adresse email valide',
+								'is_unique' => 'Cette adresse est déja assignée à un compte')
 		),
 		array(
 				'field' => 'login',
 				'label' => 'Nom d\'utilisateur',
 				'rules' => array('required',
-								'regex_match['.$loginPattern.']'),
+								'regex_match['.$loginPattern.']',
+								'is_unique[Users.login]',
+								'min_length[4]',
+								'max_length[16]'),
 				'errors' => array('required' => 'Entrez un nom d\'utilisateur',
-								'regex_match' => 'Merci de n\'utiliser que des lettres, des chiffres ou des tirets')
+								'regex_match' => 'Merci de n\'utiliser que des lettres, des chiffres ou des tirets',
+								'is_unique' => 'Cet identifiant est déja utilisé. Veuillez en choisir un autre',
+								'max_length' => 'Votre identifiant ne peut pas excéder 16 caractères',
+								'min_length' => 'Votre identifiant doit faire au moins 4 caractères')
 		),
 		array(
 				'field' => 'firstname',
@@ -158,21 +166,21 @@ $config = array(
 				'field' => 'birthdateday',
 				'label' => 'Jour de naissance',
 				'rules' => array('required',
-								'is_natural_not_zero',
-								'less_than_or_equal[31]'),
+								'is_natural_no_zero',
+								'less_than[32]'),
 				'errors' => array('required' => 'Entrez votre jour de naissance',
-								'is_natural_not_zero' => 'Entrez votre vrai jour de naissance',
+								'is_natural_no_zero' => 'Entrez un vrai jour de naissance',
 								'less_than' => 'Entrez votre vrai jour de naissance')
 		),
 		array(
 				'field' => 'birthdatemonth',
 				'label' => 'Mois de naissance',
 				'rules' => array('required',
-								'is_natural_not_zero',
-								'less_than_or_equal[12]'),
+								'is_natural_no_zero',
+								'less_than[13]'),
 				'errors' => array('required' => 'Entrez votre mois de naissance',
-								'is_natural_not_zero' => 'Entrez votre vrai mois de naissance',
-								'less_than_or_equal' => 'Entrez votre vrai mois de naissance')
+								'is_natural_no_zero' => 'Entrez un vrai mois de naissance',
+								'less_than' => 'Entrez votre vrai mois de naissance')
 		),
 		array(
 				'field' => 'birthdateyear',
@@ -188,7 +196,7 @@ $config = array(
 		),
 		array(
 				'field' => 'country',
-				'label' => 'country',
+				'label' => 'Pays',
 				'rules' => array('required',
 								'alpha',
 								'exact_length[2]'),
@@ -198,7 +206,7 @@ $config = array(
 		),
 		array(
 				'field' => 'phone',
-				'label' => 'phone',
+				'label' => 'N° de téléphone',
 				'rules' => array('integer',
 								'max_length[16]'),
 				'errors' => array('integer' => 'Entrez un numéro de téléphone valide',
@@ -206,7 +214,7 @@ $config = array(
 		),
 		array(
 				'field' => 'password',
-				'label' => 'password',
+				'label' => 'Mot de passe',
 				'rules' => array('required',
 								'regex_match['.$globalPattern.']',
 								'min_length[6]',
@@ -218,7 +226,7 @@ $config = array(
 		),
 		array(
 				'field' => 'passwordConfirm',
-				'label' => 'passwordConfirm',
+				'label' => 'Confirmation du mot de passe',
 				'rules' => array('required',
 								'regex_match['.$globalPattern.']',
 								'matches[password]'),
@@ -229,6 +237,28 @@ $config = array(
 
 	),
 
+	'signin' => array(
+
+		array(
+				'field' => 'email',
+				'label' => 'Adresse email',
+				'rules' => array('required',
+								'valid_email',
+								'callback_exists_email'),
+				'errors' => array('required' => 'Entrez votre adresse email',
+								'valid_email' => 'Entrez votre adresse email',
+								'exists_email' => 'Cette adresse email n\'existe pas')
+		),
+		
+		array(
+				'field' => 'password',
+				'label' => 'Mot de passe',
+				'rules' => array('required',
+								'callback_correct_password'),
+				'errors' => array('required' => 'Entrez votre mot de passe',
+								'correct_password' => 'Identifiant ou mot de passe incorrect')
+		)
+	),
 
 	'products/update' => array(
 
