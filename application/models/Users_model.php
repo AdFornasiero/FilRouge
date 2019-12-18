@@ -11,12 +11,12 @@ class Users_model extends CI_Model
 
     public function selectOne($id){
     	$this->db->where('userID', $id);
-    	return $this->db->get('users')->result();
+    	return $this->db->get('users')->row();
     }
 
     public function selectByEmail($email){
         $this->db->where('email', $email);
-        return $this->db->get('users')->result();
+        return $this->db->get('users')->row();
     }
 
     public function add($params){
@@ -56,8 +56,8 @@ class Users_model extends CI_Model
 
     public function updateLastSignin($email){
         $date = new Datetime();
-        $date->format('Y-m-d');
-        $this->db->set('lastsign', $date);
+        $strdate = $date->format('Y-m-d H:i:s');
+        $this->db->set('lastsignindate', $strdate);
         $this->db->where('email', $email);
         $this->db->update('users');
     }

@@ -16,10 +16,11 @@
 			</div>
 
 			<div class="mt-2">	
-			 	<label class="block text-gray-500 font-semibold pr-3" for="password">Mot de passe</label>
+			 	<label class=" text-gray-500 font-semibold pr-3" for="password">Mot de passe</label>
 				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded mt-1" type="text" name="password" id="password">
 			</div>
 			<?= form_submit('signin', 'Connexion', array('class' => 'mx-auto bg-gray-200 px-2 py-1 border-2 border-gray-300 rounded mt-4')); ?>
+			<a class="text-right text-gray-400 font-semibold" href="<?= site_url('Users/forgot_password') ?>">Mot de passe oublié</a>
 		</form>
 	</div>
 
