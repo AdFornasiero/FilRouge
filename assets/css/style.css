@@ -1,7 +1,6 @@
 /* Style the tab */
 .tabs {
   overflow: hidden;
-  border: 1px solid #ccc;
   background-color: #f1f1f1;
 }
 
@@ -30,10 +29,47 @@
 .tabcontent {
   display: none;
   padding: 6px 12px;
-  border: 1px solid #ccc;
   border-top: none;
 }
 
 .tabcontent.active{
   display: block;
+}
+
+#signupbtn{
+  background-color: #CFF8F2;
+  color: #958adb;
+}
+
+#signinbtn{
+  background-color: #7A71B5;
+  color: #c5eae5;
+}
+
+#signup{
+  background-color: #CFF8F2;
+}
+
+#signin{
+  background-color: #7A71B5;
+}
+
+#body{
+  background-color: #958adb;
+}
+
+#signin input{
+  background-color: #c5eae5;
+  border: none;
+  color: #7A71B5;
+}
+
+#signup input{
+  background-color: #958adb;
+  border: none;
+  color: #CFF8F2;
+}
+
+#signup option{
+  background-color: #CFF8F2;
 }

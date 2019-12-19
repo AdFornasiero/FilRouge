@@ -1,14 +1,14 @@
-<div class="w-full md:max-w-lg mx-auto mt-8">
+<div id="content" class="w-full md:max-w-lg mx-auto mt-8 rounded">
 
 	<?= validation_errors() ?>
 
 	<div class="tabs flex rounded">
-	  	<button class="tablinks w-1/2 <?= isset($focusOnSignin) ? 'active' : ''; ?>" id="signinbtn">Connexion</button>
-	  	<button class="tablinks w-1/2" id="signupbtn">Inscription</button>
+	  	<button class="tablinks shadow-inner border-none w-1/2 <?= isset($focusOnSignin) ? 'active' : ''; ?>" id="signinbtn">Connexion</button>
+	  	<button class="tablinks shadow-inner border-none w-1/2" id="signupbtn">Inscription</button>
 	</div>
 
 
-	<div id="signin" class="tabcontent">
+	<div id="signin" class="tabcontent shadow-xl rounded">
 		<?= form_open('', array('class'=>'flex flex-col text-center rounded p-6')) ?>
 			<div class="mt-2">	
 			 	<label class="block text-gray-500 font-semibold pr-3" for="email">Adresse email</label>
@@ -26,7 +26,7 @@
 
 
 
-	<div id="signup" class="tabcontent">
+	<div id="signup" class="tabcontent shadow-xl rounded">
 	  	<?= form_open('', array('class'=>'flex flex-col rounded px-8 pt-6 pb-6')) ?>
 
 			<div class="mt-2">	
@@ -51,7 +51,7 @@
 			</div>
 
 			<div class="md:flex mt-5 mb-2">	
-			 	<label class="w-1/2 text-gray-500 font-semibold ml-2" for="birthdate">Votre date de naissance</label>
+			 	<label class="w-1/2 text-gray-500 font-semibold text-center" for="birthdate">Date de naissance</label>
 				<input class="w-12 bg-gray-200 border-2 border-gray-300 rounded mr-1" type="text" name="birthdateday" id="birthdateday" maxlength="2" min="1" max="31" placeholder="JJ"  value="<?= set_value('birthdateday') ?>">
 				<input class="w-12 bg-gray-200 border-2 border-gray-300 rounded mr-1" type="text" name="birthdatemonth" id="birthdatemonth" maxlength="2" min="1" max="12" placeholder="MM"  value="<?= set_value('birthdatemonth') ?>">
 				<input class="w-16 bg-gray-200 border-2 border-gray-300 rounded" type="text" name="birthdateyear" id="birthdateyear" maxlength="4" min="1900" max="2020" placeholder="AAAA"  value="<?= set_value('birthdateyear') ?>">
@@ -91,3 +91,4 @@
 </div>
 
 <script src="<?= base_url('assets/js/tabs.js') ?>"></script>
+<script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>

@@ -8,7 +8,6 @@ $(document).ready(function(){
 
         $('#signin').addClass("active");   
         $("#signinbtn").addClass("active");
-       // $("body").css("background-color", "blue");
 
     });
 
@@ -19,7 +18,6 @@ $(document).ready(function(){
 
         $('#signup').addClass("active");   
         $("#signupbtn").addClass("active");
-        //$("body").css("background-color", "purple");
 
 
             // Adjust dropdown size
@@ -29,6 +27,23 @@ $(document).ready(function(){
     });
 
 
+    $('.tablinks').click(function(){
+
+        if($('#signin').hasClass('active')){
+            $('body').animate({ backgroundColor: '#958adb'}, 1000);
+            $('#signup input').animate({ backgroundColor: '#958adb'}, 1000);
+            $('#signin, #signup').animate({ backgroundColor: '#7A71B5'}, 1000);
+            $('#content,label').animate({ color: '#c5eae5'}, 750);
+        }
+
+        if($('#signup').hasClass('active')){
+            $('body').animate({ backgroundColor:'#c5eae5'}, 1000);
+            $('#signin input').animate({ backgroundColor:'#c5eae5'}, 1000);
+            $('#signin, #signup').animate({ backgroundColor: '#CFF8F2'}, 1000);
+            $('#content,label').animate({ color: '#958adb'}, 750);
+        }
+
+    });
         // Change initial displayed form
     if($("#signinbtn").hasClass("active")){
         $("#signinbtn").trigger("click");
@@ -36,5 +51,7 @@ $(document).ready(function(){
     else{
         $("#signupbtn").trigger("click");
     }
+
+
 
 });
