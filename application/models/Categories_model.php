@@ -15,6 +15,28 @@ class Categories_model extends CI_Model
         return $categoriesList;
     }
 
+
+    public function selectParentsCategories(){
+    	$categoriesList = [];
+        $this->db->select('categoryID, label');
+        $this->db->where('parentID', 0);
+        return $this->db->get('categories')->result();
+
+    }
+
+    public function selectSubCategories($parent){
+    	$categoriesList = [];
+    	$this->db->select('categoryID, label');
+        $this->db->where('parentID', $parent);
+        $subCats = $this->db->get('categories')->result();
+        if(count($subCats) > 0){
+        	return $subCats;
+        }
+        else{
+        	return false;
+        }
+    }
+
 }
 
 ?>

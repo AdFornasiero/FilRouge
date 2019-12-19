@@ -29,26 +29,51 @@
 		  	</div>
 		  	<div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
 			    <div class="text-sm lg:flex-grow">
-			      	<a href="#" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+			      	<a href="#" id="categories-toggler" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
 			        Catégorie
 			      	</a>
 			    </div>
 			</div>
 			<div>
-				<a id="loginbtn" ><i class="fas fa-user text-white text-2xl"></i></a>
+				<a id="profile-toggler" class="btn-collapse" href="<?= site_url('Users/sign') ?>"><i class="fas fa-user text-white text-2xl"></i></a>
 			</div>
 		</nav>
-href="<?= site_url('Users/sign') ?>"
-		<?php if(isset($_SESSION['logged'])){ ?>
-			<div class="collapsible-window hidden absolute flex right-0 text-center w-64 md:w-4/12 lg:w-3/12 m-2 py-2 shadow-2xl border border-gray-200 bg-white rounded">
+
+
+		<div class="collapsible-profile hidden absolute flex right-0 text-center w-64 md:w-4/12 lg:w-3/12 m-2 pt-2 pb-4 shadow-2xl border border-gray-200 bg-white rounded">
+			<?php if(isset($_SESSION['logged'])){ ?>
 
 				<span class="collapsible-elem block text-xl font-bold text-gray-800"><?= $_SESSION['login'] ?></span>
-				<span class="collapsible-elem block text-sm text-gray-400 font-semibold">Connecté</span><br><br>
+				<span class="collapsible-elem block text-sm text-gray-400 font-semibold">Connecté</span><br>
 
-				<button class="collapsible-elem m-auto bg-gray-300 border-2 border-gray-400 p-1 text-sm rounded">Se déconnecter</button>
+				<a href="<?= site_url('Users/logout') ?>" class="collapsible-elem m-auto bg-gray-300 border-2 border-gray-400 p-1 text-sm rounded">Se déconnecter</a>
 
-			</div>
-		<?php } ?>
+			<?php } else { ?>
+
+				<span class="collapsible-elem block text-sm text-gray-400 font-semibold mb-6">Vous n'êtes pas connecté</span>
+				<a href="<?= site_url('Users/sign') ?>" class="collapsible-elem m-auto bg-gray-300 border-2 border-gray-400 p-1 text-sm rounded">Se connecter</a>
+
+			<?php } ?>
+		</div>
+
+		<div class="collapsible-categories hidden absolute text-center w-auto m-2 p-2 pb-4 shadow-2xl border border-gray-200 text-sm bg-white rounded">
+			<?php 
+			foreach($this->Categories_model->selectParentsCategories() as $parent){ ?>
+				<div class="inline-block w-1/4 align-top text-left m-2">
+					<span class="font-bold text-lg"><?= $parent->label ?></span>
+					<ul class="px-2 mt-1">
+						<?php $subCats = $this->Categories_model->selectSubCategories($parent->categoryID);
+						if($subCats){
+							foreach($subCats as $subCat){ ?>
+
+								<li class=""><a href="<?= site_url('Products/list') ?>"><?= $subCat->label ?></a></li>
+
+							<?php } ?>
+						<?php } ?>
+					</ul>
+				</div>
+			<?php } ?>
+		</div>
 
 	</header>
 

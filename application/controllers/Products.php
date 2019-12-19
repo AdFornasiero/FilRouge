@@ -20,7 +20,6 @@ class Products extends CI_Controller
 
 
 	public function displayOne($id){
-		$this->output->enable_profiler(TRUE);
 		$product = $this->Products_model->selectOne($id)[0];
 		if(!isset($product)){
 			redirect('Products/displayAll');
@@ -33,6 +32,7 @@ class Products extends CI_Controller
 		$this->load->view('productDetail',$data);
 		$this->load->view('footer');
 	}
+	
 
 	public function add(){
 		$data['title'] = "Ajouter un produit";

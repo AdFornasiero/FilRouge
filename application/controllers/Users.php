@@ -7,6 +7,14 @@ class Users extends CI_Controller
 
 
 	public function sign(){
+
+
+	// Redirect user if already logged
+		if(isset($_SESSION['logged'])){
+			redirect(site_url('Users/profile'));
+		}
+
+
 		$data['countriesList'] = $this->Countries_model->selectCountries();
 
 //--------------------//
@@ -126,7 +134,6 @@ class Users extends CI_Controller
 			else{
 				$data['focusOnSignin'] = true;
 				$data['title'] = "Connexion";
-
 				$this->load->view('header', $data);
 				$this->load->view('sign', $data);
 			}
@@ -137,10 +144,17 @@ class Users extends CI_Controller
 //----------------//
 
 		else{
-			$data['title'] = "Inscription";
+			$data['focusOnSignin'] = true;
+			$data['title'] = "Connexion";
 			$this->load->view('header', $data);
 			$this->load->view('sign', $data);
 		}
+	}
+
+
+	public function logout(){
+		$this->session->sess_destroy();
+		redirect(site_url('Users/sign'));
 	}
 
 

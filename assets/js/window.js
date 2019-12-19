@@ -1,49 +1,45 @@
 $(document).ready(function(){
 
-	$('.collapsible-window').css('display', 'none');
+	
 
+	var profilePos = $('#profile-toggler').offset();
+	var profileHeight = $('#profile-toggler').height();
+	$('.collapsible-profile').offset({top:profilePos.top+profileHeight+8});
 
-	var btnpos = $('#loginbtn').offset();
-	var btnheight = $('#loginbtn').height();
-
-	$('.collapsible-window').offset({top:btnpos.top+btnheight+8});
-
-
-	$('#loginbtn').hover(function(){
-		$('.collapsible-elem').css('opacity', '0%');
-		$('.collapsible-window').slideDown('slow');
-		$('.collapsible-elem').animate({opacity: '100%'},'slow');
-		/*$('.collapsible-window').css('height','auto');
-		var finalHeight = $('.collapsible-window').height();
-		$('.collapsible-window').css('height',0);
-
-		$('.collapsible-window').animate({
-			overflow: 'hidden',
-			height: finalHeight,
-			display: 'flex',
-			'padding-top': '4px',
-			'padding-bottom': '4px',
-			'margin-top': '4px',
-			'margin-bottom': '4px'
-
-
-			
-		});*/
+	$('#profile-toggler').hover(function(){
+		$('.collapsible-profile').slideDown(400,'swing');
 	});
 
 	$('*').click(function(){
-		$('.collapsible-window').slideUp();
+		$('.collapsible-profile').slideUp(300,'swing');
+	});
+
+	/*$('.collapsible-profile').mouseleave(function(){
+		$('.collapsible-profile').slideUp(550,'swing');
+	});*/
+
+	/*$('.collapsible-profile').hover(function(){
+		$('.collapsible-profile').slideDown(350,'swing');
+	});*/
+
+	/*$('.collapsible-profile, #loginbtn').mouseenter(function(){
+		$('.collapsible-profile').slideDown();
+	});
+*/
+
+	var categoriesPos = $('#categories-toggler').offset();
+	var categoriesHeight = $('#categories-toggler').height();
+	$('.collapsible-categories').offset({top:categoriesPos.top+categoriesHeight+8,
+										left:categoriesPos.left-2});
+
+	$('#categories-toggler').hover(function(){
+		$('.collapsible-categories').slideDown(400,'swing');
 	});
 
 
-	function open(){
 
-		
-		height
-		padding
-		margin
-
-	}
-
+	$('*').click(function(){
+		$('.collapsible-categories').slideUp(300,'swing');
+	});
 
 });

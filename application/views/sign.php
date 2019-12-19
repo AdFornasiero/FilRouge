@@ -29,7 +29,6 @@
 	<div id="signup" class="tabcontent">
 	  	<?= form_open('', array('class'=>'flex flex-col rounded px-8 pt-6 pb-6')) ?>
 
-
 			<div class="mt-2">	
 			 	<label class="block text-gray-500 font-semibold ml-2" for="email">Votre adresse email</label>
 				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded mt-1" type="text" name="email" id="email"  value="<?= set_value('email') ?>">
@@ -88,7 +87,6 @@
 			<?= form_submit('signup', 'S\'inscrire', array('class' => 'mx-auto bg-gray-200 px-2 py-1 border-2 border-gray-300 rounded mt-4')); ?>
 		</form>
 	</div>
-
 
 </div>
 
