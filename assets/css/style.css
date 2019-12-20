@@ -55,21 +55,47 @@
 }
 
 #body{
-  background-color: #958adb;
+  background-color: #958adb !important;
 }
 
-#signin input{
+#signin input:not([type="checkbox"]){
   background-color: #c5eae5;
   border: none;
   color: #7A71B5;
+  box-shadow: inset 2px 2px 4px 1px rgba(0,0,0,.1);
 }
 
-#signup input{
+#signup input:not([type="checkbox"]){
   background-color: #958adb;
   border: none;
   color: #CFF8F2;
+  box-shadow: inset 2px 2px 4px 1px rgba(0,0,0,.1);
 }
 
 #signup option{
   background-color: #CFF8F2;
+}
+
+.tablinks:not(.active){
+  box-shadow: inset 2px 2px 4px 2px rgba(0,0,0,.15);
+}
+
+#signup [type="checkbox"]{
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  vertical-align: middle;
+  width: 1rem;
+  height: 1rem;
+}
+
+#signup select{
+
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+
+  background-color: #958adb;
+  border: none;
+  box-shadow: inset 2px 2px 4px 1px rgba(0,0,0,.1);
 }
