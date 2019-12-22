@@ -5,13 +5,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Products extends CI_Controller 
 {
 	public function display($id = null){
+		$data['makersList'] = $this->Products_model->selectMakers();
 
 // -----------------//
 // NO ARGS PROVIDED //
 //------------------//
 		if(!isset($id)){
 			$data['title'] = "Tous les produits";
-			$data['products'] = $this->Products_model->selectAll();
+			
+
+			if($this->input->post()){
+				var_dump($this->input->post());
+				$data['products'] = $this->Products_model->selectWithCriteria($params);
+
+			}
+			else{
+				$data['products'] = $this->Products_model->selectAll();
+
+			}
 
 			$this->load->view('header', $data);
 			$this->load->view('productsList',$data);
@@ -34,14 +45,16 @@ class Products extends CI_Controller
 		}
 	}
 
-	public function search($category = null, $minprice=null, $maxprice=null, $name=null){
-
-		$data['title'] = "Tous les produits";
-		$params = compact('categoryID','minprice','maxprice','name');
-
-		intval(params['minprice']);
-		$data['products'] = $this->Products_model->selectWithCriteria(params);
+	public function search($minprice=null, $maxprice=null, $category=null, $name=null){
+		$data['makersList'] = $this->Products_model->selectMakers();
 		
+		var_dump($data['makersList']);
+		$data['title'] = "Tous les produits";
+		$params = compact('category','minprice','maxprice','name');
+		var_dump($params);
+		
+
+
 		$this->load->view('header', $data);
 		$this->load->view('productsList',$data);
 	}

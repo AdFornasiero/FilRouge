@@ -18,10 +18,18 @@ class Products_model extends CI_Model
 
     	/*  SELECT PRODUCTS DEPENDING ON ONE OR MORE CRITERIA  */
     public function selectWithCriteria($params) {
-	    $keys = array_keys($params);
 
-	    foreach($keys as $key){	
-	    	$this->db->where($key, $params[$key]);
+	    if(isset($params['minprice'])){
+	    	$this->db->where('ptprice >= ', $params['minprice']);
+	    }
+	    if(isset($params['maxprice'])){
+	    	$this->db->where('ptprice <= ', $params['maxprice']);
+	    }
+	    if(isset($params['category'])){
+	    	$this->db->where('categoryID = ', $params['category']);
+	    }
+	    if(isset($params['name'])){
+	    	$this->db->like('label', $params['name']);
 	    }
 
 	    return $this->db->get('products')->result();       
@@ -37,6 +45,7 @@ class Products_model extends CI_Model
 		foreach($makers as $maker){
 			$makersList[$maker->maker] = $maker->maker;
 		}
+		array_unshift($makersList, "Sélectionnez");
 		return $makersList;
 	}
 

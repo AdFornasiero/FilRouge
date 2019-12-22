@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	
-
+	$('.collapsible-categories').css('z-index', 1000);
 	var profilePos = $('#profile-toggler').offset();
 	var profileHeight = $('#profile-toggler').height();
 	$('.collapsible-profile').offset({top:profilePos.top+profileHeight+8});
@@ -27,19 +27,20 @@ $(document).ready(function(){
 	});
 */
 
+	$('.collapsible-categories').css('z-index', 1000);
 	var categoriesPos = $('#categories-toggler').offset();
 	var categoriesHeight = $('#categories-toggler').height();
 	$('.collapsible-categories').offset({top:categoriesPos.top+categoriesHeight+8,
 										left:categoriesPos.left-2});
 
 	$('#categories-toggler').hover(function(){
-		$('.collapsible-categories').slideDown(400,'swing');
+		$('.collapsible-categories').slideDown(350,'swing');
 	});
 
 
 
-	$('*').click(function(){
-		$('.collapsible-categories').slideUp(300,'swing');
+	$('.collapsible-categories').mouseleave(function(){
+		$('.collapsible-categories').slideUp(400,'swing');
 	});
 
 });

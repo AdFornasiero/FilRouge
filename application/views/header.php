@@ -29,10 +29,13 @@
 		  	</div>
 		  	<div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
 			    <div class="text-sm lg:flex-grow">
-			      	<a href="<?= site_url('Products/displayAll') ?>" id="categories-toggler" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+			      	<a href="<?= site_url('Products/display') ?>" id="categories-toggler" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
 			        Tous les produits
 			      	</a>
 			    </div>
+			</div>
+			<div class="mr-2">
+				<a id="" class="" href=""><i class="fas fa-shopping-cart text-white text-2xl"></i></a>
 			</div>
 			<div>
 				<a id="profile-toggler" class="btn-collapse" href="<?= site_url('Users/sign') ?>"><i class="fas fa-user text-white text-2xl"></i></a>
