@@ -98,15 +98,23 @@
 
 		<div class="md:flex mb-6">
 			<div class="md:w-1/3">
-				<label class="block text-gray-500 font-bold md:text-right pr-3" for="label">Images du produit</label>
+				<label class="block text-gray-500 font-bold md:text-right pr-3" for="images">Images du produit</label>
 			</div>
 			<div class="md:w-2/3">
-				<?= form_upload('images') ?>
+				<?= form_upload('images','images',array('id' => 'images','multiple' => '','class' => 'img-upload')) ?>
+			</div>
+		</div>
+		<div id="img-preview-container" class="w-full overflow-x-scroll flex border-2 p-2 h-32">
+			<div id="img-preview" class="hidden img-preview">
+				<img class='w-1/3 border object-contain'>
+				<span class="absolute text-sm truncate"></span>
 			</div>
 		</div>
 
 
-		<?= form_submit('', "Ajouter", array('class'=>'bg-gray-200 border-2 border-gray-300 rounded')) ?>
+		<?= form_submit('', "Ajouter", array('class'=>'bg-gray-200 border-2 border-gray-300 rounded mx-auto py-1 px-3 mt-3')) ?>
 
 	<?= form_close() ?>
 </div>
+
+<script src="<?= base_url('assets/js/images-preview.js') ?>"></script>

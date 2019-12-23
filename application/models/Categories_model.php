@@ -15,7 +15,6 @@ class Categories_model extends CI_Model
         return $categoriesList;
     }
 
-
     public function selectParentsCategories(){
     	$categoriesList = [];
         $this->db->select('categoryID, label');
@@ -35,6 +34,18 @@ class Categories_model extends CI_Model
         else{
         	return false;
         }
+    }
+
+    public function exists($category){
+    	$this->db->where('categoryID', $category);
+
+    	if(!empty($this->db->get('categories')->row())){
+    		return $this->db->get('categories')->row();
+    	}
+    	else{
+    		return false;
+    	}
+    	
     }
 
 }

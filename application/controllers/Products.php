@@ -78,6 +78,22 @@ class Products extends CI_Controller
 	        }
 	       else{
 	       		$params = $this->input->post();
+
+	       	// Available
+	       		if(isset($params['available'])){
+	       			$params['available'] = 1;
+	       		}
+	       		else{
+	       			$params['available'] = 0;
+	       		}
+
+	       	// Category
+	       		if($this->Categories_model->exists($params['category'])){
+	       			$params['categoryID'] = $params['category'];
+	       			unset($params['category']);
+	       		}
+
+
 	       		$this->Products_model->add($params);
 	        }
 
