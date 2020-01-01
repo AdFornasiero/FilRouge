@@ -3,20 +3,18 @@
 <div class="w-4/5 md:w-3/4 lg:w-2/3 mx-auto shadow-xl mt-5 p-2">
 	<div class="flex flex-wrap">
 
+
+<!-- IMAGES -->
+
 		<div class="w-full md:w-1/2 border">
 			<div class="border m-2 rounded">
 				<img src="<?= base_url('assets/imgs/noimg.png') ?>">
 			</div>
-			<div class="w-full h-32 flex border-t mt-6">
-				<div class="w-1/3 m-2 border border-gray-300 bg-gray-200">
-					
-				</div>
-				<div class="w-1/3 m-2 border border-gray-300 bg-gray-200">
-					
-				</div>
-				<div class="w-1/3 m-2 border border-gray-300 bg-gray-200">
-					
-				</div>
+			<div class="w-full h-32 flex overflow-x-auto overflow-y-hidden border-t shadow-inner mt-6">
+				<?php foreach($images as $image): ?>
+					<img src="<?= $image ?>" class="w-1/3 object-cover object-center m-1 bg-gray-200" style="transform: rotate(<?= $imagesOrientations[array_search($image, $images)] ?>deg);">
+					<!--<div style="background-image:url(<?= $image ?>)" class="w-1/3 bg-contain bg-no-repeat m-2 border border-gray-300 bg-gray-200"></div>-->
+				<?php endforeach ?>
 			</div>
 		</div>
 

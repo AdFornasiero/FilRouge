@@ -100,6 +100,12 @@
   box-shadow: inset 2px 2px 4px 1px rgba(0,0,0,.1);
 }
 
-.img-upload{
+#img-preview-container{
+  background-image: url('../imgs/imgdrag.png');
+  background-repeat: no-repeat;
+  background-clip: padding-box;
+  background-position: center;
+  background-size: contain;
 
+  filter: grayscale(80%);
 }

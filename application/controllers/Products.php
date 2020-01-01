@@ -15,7 +15,6 @@ class Products extends CI_Controller
 			
 
 			if($this->input->post()){
-				var_dump($this->input->post());
 				$data['products'] = $this->Products_model->selectWithCriteria($params);
 
 			}
@@ -33,8 +32,35 @@ class Products extends CI_Controller
 //- -----------//
 		else{
 			$product = $this->Products_model->selectOne($id)[0];
+
+		// Redirect if product ID doesn't exist
 			if(!isset($product)){
 				redirect('Products/display');
+			}
+
+			$images = []; $imagesOrientations = [];
+			if(is_dir('assets/imgs/store/'.$product->productID)){
+				$files = scandir('assets/imgs/store/'.$product->productID);
+				foreach($files as $file){
+					if($file != '.' && $file != '..'){
+						
+						array_push($images, base_url('assets/imgs/store/'.$product->productID.'/'.$file));
+						array_push($imagesOrientations, $this->getOrientation($images[0]));
+
+					}
+				}
+				$data['images'] = $images;
+				$data['imagesOrientations'] = $imagesOrientations;
+
+			}
+			else{
+				//$images[0] = base_url('assets/imgs/noimg.png');
+				$imagesOrientations[0] = 0;
+
+				$data['images'] = $images;
+				$data['imagesOrientations'] = $imagesOrientations;
+
+				var_dump($images);
 			}
 
 			$data['product'] = $product;
@@ -67,16 +93,14 @@ class Products extends CI_Controller
 		$data['categoriesList'] = $this->Categories_model->selectCategories();
 
 
-	
 		if($this->input->post()){
 
-			if ($this->form_validation->run() == FALSE)
-	        {
+			if (!$this->form_validation->run()){
+
 	            $this->load->view('header', $data);
 				$this->load->view('productAdd', $data);
-				$this->load->view('footer');
 	        }
-	       else{
+	        else{
 	       		$params = $this->input->post();
 
 	       	// Available
@@ -93,22 +117,98 @@ class Products extends CI_Controller
 	       			unset($params['category']);
 	       		}
 
+	       		$insertedID = $this->Products_model->add($params);
 
-	       		$this->Products_model->add($params);
+	       		if(isset($insertedID)){
+	       			$data['added'] = true;
+
+	       			if($this->upload_images($insertedID) == 0){
+	       				$data['uploaded'] = true;
+	       			}
+	       			else{
+		       			$data['uploaded'] = false;
+		       		}
+	       		}
+	       		else{
+	       			$data['added'] = false;
+	       		}
+  	
+	       		$this->load->view('header', $data);
+				$this->load->view('productAdd', $data);
 	        }
 
 		}
 		else{
 			$this->load->view('header', $data);
 			$this->load->view('productAdd', $data);
-			$this->load->view('footer');
 		}
 
-
-
-
-
 	}
+
+	public function upload_images($filename){
+		$images = []; $errors = 0;
+
+	// Create folder for images storage
+		mkdir('assets\imgs\store\\'.$filename, 0755);
+		
+	// Set default upload config and load library
+		$config['upload_path'] = 'assets/imgs/store/'.$filename.'/';
+		$config['allowed_types'] = 'gif|jpg|jpeg|png';
+		$config['max_width'] = 2048;
+		$config['max_height'] = 2048;
+
+		$this->load->library('upload', $config);
+
+	// For each uploaded file...
+		for($i = 0; $i < count($_FILES['images']['name']); $i++){
+
+   			if(!empty($_FILES['images']['name'][$i])){
+
+		// Set temporary $_FILES that will be check by CI
+		        $_FILES['image']['name'] = $_FILES['images']['name'][$i];
+		        $_FILES['image']['type'] = $_FILES['images']['type'][$i];
+		        $_FILES['image']['tmp_name'] = $_FILES['images']['tmp_name'][$i];
+		        $_FILES['image']['error'] = $_FILES['images']['error'][$i];
+		        $_FILES['image']['size'] = $_FILES['images']['size'][$i];
+
+			// Set image name and initialize upload config
+		        $config['file_name'] = $i;
+				$this->upload->initialize($config);
+
+			// Upload image
+		        if(!$this->upload->do_upload('image')){
+		        	$errors++;
+		        }
+
+		    }
+   		} 
+   	// End for
+
+   		return $errors;
+	}
+
+// Define default image orientation
+	public function getOrientation($image){
+		switch(exif_read_data($image)['Orientation']){
+			case 1:
+				$imageOrientation = 0;
+				break;
+			case 8:
+				$imageOrientation = 270;
+				break;
+			case 3:
+				$imageOrientation = 180;
+				break;
+			case 6:
+				$imageOrientation = 90;
+				break;
+			default:
+				$imageOrientation = 0;
+		}
+
+		return $imageOrientation;
+	}
+
 
 
 }

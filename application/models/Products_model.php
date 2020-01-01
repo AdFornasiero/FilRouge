@@ -51,8 +51,8 @@ class Products_model extends CI_Model
 
 		/*  ADD A PRODUCT  */
 	public function add($params){
-		var_dump($params);
 		$this->db->insert('products', $params);
+		return $this->db->insert_id();
 	}
 
 

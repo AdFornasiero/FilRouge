@@ -2,10 +2,10 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Dec 19, 2019 at 04:49 PM
--- Server version: 5.7.26-log
--- PHP Version: 7.2.18
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  mer. 01 jan. 2020 à 22:32
+-- Version du serveur :  5.7.26-log
+-- Version de PHP :  7.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ecom`
+-- Base de données :  `ecom`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `adresses`
+-- Structure de la table `adresses`
 --
 
 DROP TABLE IF EXISTS `adresses`;
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `adresses` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Structure de la table `categories`
 --
 
 DROP TABLE IF EXISTS `categories`;
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 ) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `categories`
+-- Déchargement des données de la table `categories`
 --
 
 INSERT INTO `categories` (`categoryID`, `label`, `parentID`) VALUES
@@ -92,7 +92,7 @@ INSERT INTO `categories` (`categoryID`, `label`, `parentID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `countries`
+-- Structure de la table `countries`
 --
 
 DROP TABLE IF EXISTS `countries`;
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `countries` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `countries`
+-- Déchargement des données de la table `countries`
 --
 
 INSERT INTO `countries` (`charcode`, `name`, `dialcode`) VALUES
@@ -326,7 +326,7 @@ INSERT INTO `countries` (`charcode`, `name`, `dialcode`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `discounts`
+-- Structure de la table `discounts`
 --
 
 DROP TABLE IF EXISTS `discounts`;
@@ -344,7 +344,7 @@ CREATE TABLE IF NOT EXISTS `discounts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `madeof`
+-- Structure de la table `madeof`
 --
 
 DROP TABLE IF EXISTS `madeof`;
@@ -360,7 +360,7 @@ CREATE TABLE IF NOT EXISTS `madeof` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
+-- Structure de la table `orders`
 --
 
 DROP TABLE IF EXISTS `orders`;
@@ -381,7 +381,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Structure de la table `products`
 --
 
 DROP TABLE IF EXISTS `products`;
@@ -404,10 +404,10 @@ CREATE TABLE IF NOT EXISTS `products` (
   UNIQUE KEY `reference` (`reference`),
   KEY `supplierID` (`supplierID`),
   KEY `categoryID` (`categoryID`)
-) ENGINE=MyISAM AUTO_INCREMENT=392 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=420 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `products`
+-- Déchargement des données de la table `products`
 --
 
 INSERT INTO `products` (`productID`, `label`, `reference`, `maker`, `ptprice`, `description`, `discount`, `stock`, `adddate`, `updatedate`, `available`, `availabilitydelay`, `supplierID`, `categoryID`) VALUES
@@ -512,12 +512,40 @@ INSERT INTO `products` (`productID`, `label`, `reference`, `maker`, `ptprice`, `
 (388, 'auctor, nunc nulla', 'BF7DA43D', 'Nunc Sit Amet LLP', '9.14', 'Integer in magna. Phasellus dolor elit, pellentesque a, facilisis non, bibendum sed, est. Nunc laoreet lectus quis massa. Mauris vestibulum, neque sed dictum eleifend, nunc risus varius orci, in consequat enim diam vel arcu. Curabitur ut odio vel est tempor bibendum. Donec felis orci, adipiscing non, luctus sit amet, faucibus ut, nulla. Cras eu tellus eu', NULL, NULL, '2019-12-03 10:17:18', NULL, 1, NULL, 8, 4),
 (389, 'tristique pellentesque, tellus', 'FDC56125', 'Ut Tincidunt Corporation', '5.16', 'vel, faucibus id, libero. Donec consectetuer mauris id sapien. Cras dolor dolor, tempus non, lacinia at, iaculis quis, pede. Praesent eu dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean eget magna. Suspendisse tristique neque venenatis lacus. Etiam bibendum fermentum metus. Aenean sed pede nec ante blandit viverra. Donec tempus, lorem fringilla ornare placerat, orci lacus vestibulum lorem, sit amet ultricies sem magna nec quam. Curabitur vel lectus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec dignissim magna a tortor. Nunc commodo auctor velit. Aliquam nisl. Nulla eu neque pellentesque massa', NULL, NULL, '2019-12-03 10:17:18', NULL, 1, NULL, 3, 1),
 (390, 'Integer aliquam adipiscing lacus.', '7D2F7F47', 'Fames Ac Turpis Corp.', '3.94', 'et, rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in, hendrerit consectetuer, cursus et, magna. Praesent interdum ligula eu enim. Etiam imperdiet dictum magna. Ut tincidunt orci quis lectus. Nullam suscipit, est ac facilisis facilisis, magna tellus faucibus leo, in lobortis tellus justo sit amet nulla. Donec non justo. Proin non massa non ante bibendum ullamcorper. Duis cursus, diam at pretium aliquet, metus urna convallis erat, eget tincidunt dui augue eu tellus. Phasellus elit pede, malesuada vel, venenatis vel, faucibus id, libero. Donec consectetuer mauris id sapien. Cras dolor dolor, tempus non, lacinia at, iaculis quis, pede. Praesent eu dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean eget magna. Suspendisse tristique neque venenatis lacus. Etiam bibendum fermentum metus. Aenean sed pede nec ante blandit viverra. Donec tempus, lorem fringilla ornare placerat, orci lacus vestibulum lorem, sit amet ultricies', NULL, NULL, '2019-12-03 10:17:18', NULL, 1, NULL, 14, 4),
-(391, 'azertyui', 'qsdfgh', 'Adipiscing Lobortis Foundation', '41.00', 'sdfghyujik', NULL, 1, '2019-12-09 13:18:17', NULL, 0, 2, 1, 0);
+(391, 'azertyui', 'qsdfgh', 'Adipiscing Lobortis Foundation', '41.00', 'sdfghyujik', NULL, 1, '2019-12-09 13:18:17', NULL, 0, 2, 1, 0),
+(392, 'Geforce 550M', 'GF550MNVDk', 'Blandit Mattis Cras Limited', '110.00', '', NULL, 0, '2019-12-28 11:09:41', NULL, 1, NULL, 11, 1),
+(393, 'Geforce 550Muyt', 'AZERTFD', 'Dolor Nonummy Inc.', '79.00', 'YEP', NULL, 68, '2019-12-29 16:32:40', NULL, 1, NULL, 21, 4),
+(394, 'Geforce 550Muyt', 'AZERTFDSDF', 'Dolor Nonummy Inc.', '79.00', 'YEP', NULL, 68, '2019-12-29 16:33:34', NULL, 1, NULL, 21, 1),
+(395, 'Geforce 550Muyt', 'AZEFDSXVC', 'Dolor Nonummy Inc.', '79.00', 'YEP', NULL, 68, '2019-12-29 16:34:55', NULL, 1, NULL, 21, 1),
+(396, 'Geforce 550Muyt', 'qsdfghjkl5', 'Dolor Nonummy Inc.', '79.00', 'YEP', NULL, 68, '2019-12-29 16:37:30', NULL, 1, NULL, 21, 1),
+(397, 'Geforce 550Muyt', 'hxcbqwxcvbh', 'Dolor Nonummy Inc.', '79.00', 'YEP', NULL, 68, '2019-12-29 16:41:09', NULL, 1, NULL, 21, 1),
+(398, 'Geforce 550Muyt', 'hxcbqwxcaqw', 'Dolor Nonummy Inc.', '79.00', 'YEP', NULL, 68, '2019-12-29 16:45:43', NULL, 1, NULL, 21, 1),
+(399, 'Geforce 550Muyt', 'hxcbqwxcaqwq', 'Dolor Nonummy Inc.', '79.00', 'YEP', NULL, 68, '2019-12-29 16:47:14', NULL, 1, NULL, 21, 1),
+(400, 'Geforce 550Muyt', 'azertyuijhgf', 'Dolor Nonummy Inc.', '79.00', 'YEP', NULL, 68, '2019-12-29 16:48:06', NULL, 1, NULL, 21, 1),
+(401, 'Geforce 550Muyt', 'qwxsdcvf', 'Dolor Nonummy Inc.', '79.00', 'YEP', NULL, 68, '2019-12-29 16:49:26', NULL, 1, NULL, 21, 1),
+(402, 'Geforce 550Muyt', 'qwxsdcvfa', 'Dolor Nonummy Inc.', '79.00', 'YEP', NULL, 68, '2019-12-29 16:51:51', NULL, 1, NULL, 21, 1),
+(403, 'Geforce 550Muyt', 'qwxsdcvfd', 'Dolor Nonummy Inc.', '79.00', 'YEP', NULL, 68, '2019-12-29 16:54:49', NULL, 1, NULL, 21, 1),
+(404, 'Geforce 550Muyt', 'qwxsdcvfw', 'Dolor Nonummy Inc.', '79.00', 'YEP', NULL, 68, '2019-12-29 16:55:50', NULL, 1, NULL, 21, 1),
+(405, 'Geforce 550Muyt', 'qwxsdcvffg', 'Dolor Nonummy Inc.', '79.00', 'YEP', NULL, 68, '2019-12-29 16:59:25', NULL, 1, NULL, 21, 1),
+(406, 'Geforce 550Muyt', 'qwxsdcvffgq', 'Dolor Nonummy Inc.', '79.00', 'YEP', NULL, 68, '2019-12-29 16:59:58', NULL, 1, NULL, 21, 1),
+(407, 'Geforce 550Muyt', 'qwxsdqwxsa', 'Dolor Nonummy Inc.', '79.00', 'YEP', NULL, 68, '2019-12-29 17:01:22', NULL, 1, NULL, 21, 1),
+(408, 'Geforce 550Muyt', 'qwxsdqwxsz', 'Dolor Nonummy Inc.', '79.00', 'YEP', NULL, 68, '2019-12-29 17:01:58', NULL, 1, NULL, 21, 1),
+(409, 'Geforce 550Muyt', 'qwxsdqwxst', 'Dolor Nonummy Inc.', '79.00', 'YEP', NULL, 68, '2019-12-29 17:05:42', NULL, 1, NULL, 21, 1),
+(410, 'CORE 580', 'COR580A', 'Ante Limited', '14.00', 'OKOK', NULL, 3, '2019-12-29 17:15:03', NULL, 1, NULL, 12, 7),
+(411, 'CORE 580', 'COR580AZ', 'Ante Limited', '14.00', 'OKOK', NULL, 3, '2019-12-29 17:45:52', NULL, 1, NULL, 12, 1),
+(412, 'CORE 580', 'COR580AZR', 'Ante Limited', '14.00', 'OKOK', NULL, 3, '2019-12-29 17:46:11', NULL, 1, NULL, 12, 1),
+(413, 'CORE 580', 'COR580AZRA', 'Ante Limited', '14.00', 'OKOK', NULL, 3, '2019-12-29 17:46:27', NULL, 1, NULL, 12, 1),
+(414, 'CORE 580', 'COR580AZRE', 'Ante Limited', '14.00', 'OKOK', NULL, 3, '2019-12-29 17:49:01', NULL, 1, NULL, 12, 1),
+(415, 'LEBOCASK', 'LBSKCASQ8', 'Cras LLP', '19.00', 'Oui il é tre bô', NULL, 0, '2019-12-30 19:03:31', NULL, 1, NULL, 7, 15),
+(416, 'LEBOCASK', 'LBSKCASQ89', 'Cras LLP', '19.00', 'Oui il é tre bô', NULL, 0, '2019-12-30 19:07:18', NULL, 1, NULL, 7, 1),
+(417, 'LEBOCASK', 'LBSKCASQ90', 'Cras LLP', '19.00', 'Oui il é tre bô', NULL, 0, '2019-12-30 19:07:49', NULL, 1, NULL, 14, 1),
+(418, 'azertyuisd', 'PFMIDFED6', 'Cras LLP', '41.00', '', NULL, 0, '2019-12-30 19:24:40', NULL, 1, NULL, 17, 5),
+(419, 'azertyuisd', 'PFMIDFED7', 'Cras LLP', '41.00', '', NULL, 0, '2019-12-30 19:25:31', NULL, 1, NULL, 17, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Structure de la table `roles`
 --
 
 DROP TABLE IF EXISTS `roles`;
@@ -528,7 +556,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `roles`
+-- Déchargement des données de la table `roles`
 --
 
 INSERT INTO `roles` (`roleID`, `label`) VALUES
@@ -540,7 +568,7 @@ INSERT INTO `roles` (`roleID`, `label`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `suppliers`
+-- Structure de la table `suppliers`
 --
 
 DROP TABLE IF EXISTS `suppliers`;
@@ -553,7 +581,7 @@ CREATE TABLE IF NOT EXISTS `suppliers` (
 ) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `suppliers`
+-- Déchargement des données de la table `suppliers`
 --
 
 INSERT INTO `suppliers` (`supplierID`, `name`, `contact`, `phone`) VALUES
@@ -583,7 +611,7 @@ INSERT INTO `suppliers` (`supplierID`, `name`, `contact`, `phone`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structure de la table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -612,12 +640,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`userID`, `login`, `email`, `password`, `firstname`, `lastname`, `pro`, `phone`, `birthdate`, `signupdate`, `lastsignindate`, `charcode`, `commercialID`, `roleID`) VALUES
 (1, 'ElFornas', 'adrien.forna@gmail.com', '$2y$10$nuQ29MM1Rp1qpdPijzYcWe5G23Hky.pBNlH0lA8/OIvymcB1a65SS', 'Adrien', 'Fornasiero', 0, '0625769712', '1997-05-04', '2019-12-17 10:17:15', '2019-12-19 11:12:10', 'FR', NULL, 2),
-(2, 'Tekilaz', 'adrienf1997@aol.com', '$2y$10$dv.dxMlZG9dt3v5znMS4WOalRIqTE0s5anZaNScHHKeyGGlwvoRoq', 'Cmonprénom', 'Cmonnom', 0, '0784569812', '1985-05-04', '2019-12-17 11:01:55', NULL, 'FR', NULL, 1),
+(2, 'Tekilaz', 'adrienf1997@aol.com', '$2y$10$dv.dxMlZG9dt3v5znMS4WOalRIqTE0s5anZaNScHHKeyGGlwvoRoq', 'Cmonprénom', 'Cmonnom', 0, '0784569812', '1985-05-04', '2019-12-17 11:01:55', '2019-12-21 19:38:26', 'FR', NULL, 1),
 (3, 'Pouque', 'dvswvv@aol.com', '$2y$10$2I1LvzxbF/8PrLV/2dsb0umdWIPKnvNy6VFpRwU.pz433NFhzbOYy', 'Pat', 'Dufresne', 0, '0698653214', '1957-12-26', '2019-12-17 11:10:39', NULL, 'FR', NULL, 2),
 (4, 'Azerty', 'azerty@aol.com', '$2y$10$cxkZBi8mQC4tOGVC9OoU4eKKv1hvp0WUIPmLc9Of.y6hyES7FrYQe', 'Gerard', 'Pasquier', 0, '0698653214', '1969-12-26', '2019-12-17 11:12:24', NULL, 'FI', NULL, 2),
 (5, 'ElFornas04', 'dsdfgvv@aol.com', '$2y$10$OkbkbG5k6dsmqPDeHmQdgemMb0m6ruku74zNr5nAbH/4fZvzWlW6q', 'Paul', 'Vermon', 0, '0789651425', '1987-05-16', '2019-12-19 10:18:31', NULL, 'PS', NULL, 2);
