@@ -13,7 +13,7 @@ class Products_model extends CI_Model
     	/*  SELECT ONLY ONE PRODUCT  */
     public function selectOne($id) {
         $this->db->where('productID', $id);
-        return $this->db->get('products')->result();           
+        return $this->db->get('products')->row();           
     }
 
     	/*  SELECT PRODUCTS DEPENDING ON ONE OR MORE CRITERIA  */

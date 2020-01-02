@@ -1,8 +1,8 @@
 
 
-<?php if(isset($added) && $added){ ?>
+<?php if(isset($updated) && $updated){ ?>
 	<div class="mx-auto max-w-xl text-sm font-semibold bg-green-100 text-green-600 border border-green-600 px-4 py-2 my-2 text-center rounded shadow">
-		<p>Le produit a correctement été ajouté au catalogue</p>
+		<p>Le produit a correctement été modifié</p>
 	</div>
 <?php };
 if(isset($uploaded) && !$uploaded){ ?>
@@ -11,13 +11,13 @@ if(isset($uploaded) && !$uploaded){ ?>
 	</div>
 <?php } ?>
 
-
+<?= validation_errors() ?>
 <!--------------->
 <!-- FORM OPEN -->
 <!--------------->
 <div class="mx-auto w-full max-w-lg shadow-xl mt-4">
 	<?= form_open_multipart('', array('class'=>'flex flex-col rounded px-8 pt-6 pb-8 mb-4')) ?>
-	<h2 class="text-3xl text-gray-600 font-semibold mb-6 ml-2">Ajouter un produit</h2>
+	<h2 class="text-3xl text-gray-600 font-semibold mb-6 ml-2">Modifier le produit</h2>
 		
 	<!-------------->
 	<!-- CATEGORY -->
@@ -39,7 +39,7 @@ if(isset($uploaded) && !$uploaded){ ?>
 				<label class="text-gray-500 font-bold pr-3 pl-1" for="label">Libellé</label>
 			</div>
 			<div class="md:w-3/4">
-				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded" type="text" name="label" id="label" value="<?= (!isset($added)) ? set_value('label') : '' ?>">
+				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded" type="text" name="label" id="label" value="<?= ($updated) ? set_value('label') : $product->label ?>">
 			</div>
 		</div>
 
@@ -51,7 +51,7 @@ if(isset($uploaded) && !$uploaded){ ?>
 				<label class="text-gray-500 font-bold pr-3 pl-1" for="referenceInput">Référence</label>
 			</div>
 			<div class="md:w-3/4">
-				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded" type="text" name="reference" id="referenceInput" value="<?= (!isset($added)) ? set_value('reference') : '' ?>">
+				<input class="w-full bg-gray-200 border-2 border-gray-200 rounded text-gray-600" type="text" name="reference" id="referenceInput" value="<?= ($updated) ? '' : $product->reference ?>" disabled>
 			<!--<button name="reference" value="Auto-générer" id="referenceButton">-->
 			</div>
 		</div>
@@ -76,7 +76,7 @@ if(isset($uploaded) && !$uploaded){ ?>
 				<label class="text-gray-500 font-bold pr-3 pl-1" for="description">Description</label>
 				</div>
 			<div class="md:w-3/4">
-				<textarea class="w-full bg-gray-200 border-2 border-gray-300 rounded" name="description" id="description"><?= (!isset($added)) ? set_value('description') : '' ?></textarea>
+				<textarea class="w-full bg-gray-200 border-2 border-gray-300 rounded" name="description" id="description"><?= ($updated) ? set_value('description') : $product->description ?></textarea>
 			</div>
 		</div>
 
@@ -87,31 +87,30 @@ if(isset($uploaded) && !$uploaded){ ?>
 			<div class="md:w-1/4">
 				<label class="text-gray-500 font-bold pr-3 pl-1" for="maker">Fabriquant</label>
 			</div>
-			<div class="md:w-3/4 w-full dropdown-collapse">
+			<div class="md:w-3/4 w-full hidden dropdown-collapse">
 				<?= form_dropdown('maker', $makersList,set_value('maker'), array('class'=>'w-full bg-gray-200 border-2 border-gray-300 rounded')) ?>
 			</div>
-			<input class="input-collapse hidden w-full md:w-3/4 bg-gray-200 border-2 border-gray-300 rounded" type="text", name="ownmaker", id="ptprice" value="<?= (!isset($added)) ? set_value('') : '' ?>">
+			<input class="input-collapse w-full md:w-3/4 bg-gray-200 border-2 border-gray-300 rounded" type="text", name="ownmaker", id="ptprice" value="<?= ($updated) ? set_value('') : $product->maker ?>">
 		</div>
 
 		<div class="block text-right text-gray-500 font-semibold mb-2">
-			<span class="input-activator font-semibold text-xs hover:underline cursor-pointer">Entrez-le manuellement</span>
+			<span class="input-activator font-semibold text-xs hover:underline cursor-pointer">Afficher la liste</span>
 		</div>
 
-		
 	<!------------->
 	<!--  PRICE  -->
 	<!------------->
 		<div class="flex mb-5">
 			<div class="w-1/2 mr-1">
 				<label class="text-gray-500 font-bold pl-1" for="ptprice">Prix<span class="font-semibold text-xs"> hors-taxes</span></label>
-				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded" type="text", name="ptprice", id="ptprice" value="<?= (!isset($added)) ?set_value('ptprice') : '' ?>">
+				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded" type="text", name="ptprice", id="ptprice" value="<?= ($updated) ? set_value('ptprice') : $product->ptprice ?>">
 			</div>
 	<!------------->
 	<!--  STOCK  -->
 	<!------------->
 			<div class="w-1/2 ml-1">
 				<label class="text-gray-500 font-bold pl-1" for="stock">En stock</label>
-				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded" type="text", name="stock", id="stock" value="<?= (!isset($added)) ? set_value('stock') : '' ?>">
+				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded" type="text", name="stock", id="stock" value="<?= ($updated) ? set_value('stock') : $product->stock ?>">
 			</div>
 		</div>
 
@@ -128,7 +127,7 @@ if(isset($uploaded) && !$uploaded){ ?>
 	<!----------------->
 			<div class="w-1/3 md:w-1/4">
 				<label class="text-gray-500 font-bold pr-3" for="available">Disponible</label>
-				<input class="form-check-input" type="checkbox" name="available" id="available" checked>
+				<input class="form-check-input" type="checkbox" name="available" id="available" <?= ($product->available) ? 'checked' : '' ?>>
 			</div>
 		</div>
 

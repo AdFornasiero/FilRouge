@@ -31,7 +31,7 @@ class Products extends CI_Controller
 // ID PROVIDED //
 //- -----------//
 		else{
-			$product = $this->Products_model->selectOne($id)[0];
+			$product = $this->Products_model->selectOne($id);
 
 		// Redirect if product ID doesn't exist
 			if(!isset($product)){
@@ -96,7 +96,6 @@ class Products extends CI_Controller
 		if($this->input->post()){
 
 			if (!$this->form_validation->run()){
-
 	            $this->load->view('header', $data);
 				$this->load->view('productAdd', $data);
 	        }
@@ -116,6 +115,12 @@ class Products extends CI_Controller
 	       			$params['categoryID'] = $params['category'];
 	       			unset($params['category']);
 	       		}
+
+	       	// Maker
+	       		if($params['ownmaker'] != ''){
+	       			$params['maker'] = $params['ownmaker'];
+	       		}
+	       		unset($params['ownmaker']);
 
 	       		$insertedID = $this->Products_model->add($params);
 
@@ -141,6 +146,89 @@ class Products extends CI_Controller
 		else{
 			$this->load->view('header', $data);
 			$this->load->view('productAdd', $data);
+		}
+
+	}
+
+	public function update($id = null){
+		
+// -----------------//
+// NO ARGS PROVIDED //
+//------------------//
+		if(!isset($id)){
+			echo "no id";
+		}
+
+// ------------//
+// ID PROVIDED //
+//-------------//
+		else{
+			$product = $this->Products_model->selectOne($id);
+
+// ------------------------//
+// NO PRODUCT WITH THIS ID //
+//-------------------------//
+			if(!isset($product)){
+				echo "no product";
+			}
+
+// ------------//
+// NORMAL FLOW //
+//-------------//
+			else{
+
+				$data['title'] = "Modification de ".$product->label;
+				$data['makersList'] = $this->Products_model->selectMakers();
+				$data['suppliersList'] = $this->Suppliers_model->selectSuppliers();
+				$data['categoriesList'] = $this->Categories_model->selectCategories();
+				$data['product'] = $product;
+
+				if(!$this->input->post()){
+					$data['updated'] = false;
+					$this->load->view('header',$data);
+					$this->load->view('productUpdate',$data);
+
+				}
+				else{
+
+					if(!$this->form_validation->run()){
+										var_dump($this->input->post());
+						$data['updated'] = false;
+						$this->load->view('header',$data);
+						$this->load->view('productUpdate',$data);
+					}
+					else{
+						$params = $this->input->post();
+						var_dump($params);
+
+					// Available
+			       		if(isset($params['available'])){
+			       			$params['available'] = 1;
+			       		}
+			       		else{
+			       			$params['available'] = 0;
+			       		}
+
+			       	// Category
+			       		if($this->Categories_model->exists($params['category'])){
+			       			$params['categoryID'] = $params['category'];
+			       			unset($params['category']);
+			       		}
+
+			       	// Maker
+			       		if($params['ownmaker'] != ''){
+			       			$params['maker'] = $params['ownmaker'];
+			       		}
+			       		if($params['maker']) = '0'{
+			       			$params['maker'] = $params['ownmaker'];
+			       		}
+			       		unset($params['ownmaker']);
+
+					}
+
+				}
+
+			}
 		}
 
 	}

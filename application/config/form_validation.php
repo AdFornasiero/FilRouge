@@ -3,7 +3,7 @@
 
 $referencePattern = '/^[\w\-]{6,12}$/'; // Entre 3 et 10 lettres, chiffres, tirets ou underscore
 
-$labelPattern = '/^[0-9A-Za-z-_áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ ]{2,24}$/'; // 2 à 24 chiffres ou lettres (+accents)(+tirets/underscores/espaces)
+$labelPattern = '/^[0-9A-Za-z.-_áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ ]{0,24}$/'; // 2 à 24 chiffres ou lettres (+accents)(+tirets/underscores/espaces/points)
 
 $globalPattern = '/^[0-9A-Za-záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ \.,?;:!§=+\-_°@()&\"\'\[\]\#\~²]{0,1030}$/'; // Lettres, mots, chiffres (max 1030)
 
@@ -84,6 +84,16 @@ $config = array(
 								'max_length' => 'Sélectionnez le fabriquant, ou entrez-le manuellement')
 		),
 
+		// OWNMAKER
+		array(
+				'field' => 'ownmaker',
+				'label' => 'Fabriquant',
+				'rules' => array('max_length[128]',
+								'regex_match['.$labelPattern.']'),
+				'errors' => array('max_length' => 'Le nom du fabriquant semble incorrect',
+								'regex_match' => 'Le nom du fabriquant semble incorrect')
+		),
+
 		// PRICE
 		array(
 				'field' => 'ptprice',
@@ -114,6 +124,89 @@ $config = array(
 								'max_length[6]'),
 				'errors' => array('is_natural' => 'Entrez le délai en jours',
 								'max_length' => 'Entrez le délai en jours')
+
+		)
+
+	),
+
+
+	'Products/update' => array(
+
+		// LABEL
+		array(
+				'field' => 'label',
+				'label' => 'Libellé',
+				'rules' => array('required',
+								'min_length[4]',
+								'max_length[128]',
+								'regex_match['.$labelPattern.']'),
+				'errors' => array('required' => 'Veuillez entrer le libellé',
+								'min_length' => 'Au moins 3 caractères sont attendus',
+								'max_length' => 'Votre libellé est bien trop long! (max. 128 caractères)',
+								'regex_match' => 'Entrez un libellé valide!')
+		),
+
+		// SUPPLIER
+		array(
+				'field' => 'supplierID',
+				'label' => 'Fournisseur',
+				'rules' => array('required',
+								'integer'),
+				'errors' => array('required' => 'Selectionnez le fournisseur',
+								'integer' => 'Selectionnez le fournisseur')
+		),
+
+		// DESCRIPTION
+		array(
+				'field' => 'description',
+				'label' => 'Description',
+				'rules' => array('max_length[1024]',
+								'regex_match['.$globalPattern.']'),
+				'errors' => array('max_length' => 'La description ne peut pas excéder 1024 caractères',
+								'regex_match' => 'Des caractères non-acceptés ont été detectés dans la description')
+		),
+
+		// MAKER
+		array(
+				'field' => 'maker',
+				'label' => 'Fabriquant',
+				'rules' => array('required',
+								'regex_match['.$globalPattern.']',
+								'max_length[64]'),
+				'errors' => array('required' => 'Sélectionnez le fabriquant, ou entrez-le manuellement',
+								'regex_match' => 'Sélectionnez le fabriquant, ou entrez-le manuellement',
+								'max_length' => 'Sélectionnez le fabriquant, ou entrez-le manuellement')
+		),
+
+		// OWNMAKER
+		array(
+				'field' => 'ownmaker',
+				'label' => 'Fabriquant',
+				'rules' => array('max_length[128]',
+								'regex_match['.$labelPattern.']'),
+				'errors' => array('max_length' => 'Le nom du fabriquant semble incorrectgg',
+								'regex_match' => 'Le nom du fabriquant semble incorrectee')
+		),
+
+		// PRICE
+		array(
+				'field' => 'ptprice',
+				'label' => 'Prix',
+				'rules' => array('required',
+								'regex_match['.$pricePattern.']'),
+				'errors' => array('required' => 'Entrez le prix hors-taxes du produit',
+								'regex_match' => 'Le prix n\'est pas correct')
+
+		),
+
+		// STOCK
+		array(
+				'field' => 'stock',
+				'label' => 'Quantité en stock',
+				'rules' => array('is_natural',
+								'max_length[10]'),
+				'errors' => array('is_natural' => 'Entrez la quantité en stock',
+								'max_length' => 'Entrez la quantité en stock')
 
 		)
 
