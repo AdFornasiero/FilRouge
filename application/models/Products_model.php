@@ -57,9 +57,14 @@ class Products_model extends CI_Model
 
 
 		/*  UPDATE A PRODUCT  */
-	public function update($id,$params){
-		$this->db->where('productID', $id);
-		$this->db->update('products', $params);
+	public function update($params){
+		$this->db->where('productID', $params['productID']);
+		if($this->db->update('products', $params)){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 }

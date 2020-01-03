@@ -14,7 +14,7 @@ $(document).ready(function(){
 		var images = $('.img-upload').prop('files');
 		for(var i = 0; i < images.length; i++){
 
-			var imgpreview = '<img id="img'+i+'" class="img-preview w-1/3 h-full border object-contain bg-gray-200 mr-1" src="'+window.URL.createObjectURL(images[i])+'" alt="Image '+i+1+'">';
+			var imgpreview = '<img id="img'+i+'" class="img-preview w-auto h-full border object-contain bg-gray-200 mr-1" src="'+window.URL.createObjectURL(images[i])+'" alt="Image '+i+1+'">';
 
 			$('#img-preview-container').html($('#img-preview-container').html() + imgpreview);
 

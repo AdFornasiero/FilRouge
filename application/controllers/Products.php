@@ -25,6 +25,7 @@ class Products extends CI_Controller
 
 			$this->load->view('header', $data);
 			$this->load->view('productsList',$data);
+
 		}
 
 // ------------//
@@ -192,14 +193,12 @@ class Products extends CI_Controller
 				else{
 
 					if(!$this->form_validation->run()){
-										var_dump($this->input->post());
 						$data['updated'] = false;
 						$this->load->view('header',$data);
 						$this->load->view('productUpdate',$data);
 					}
 					else{
 						$params = $this->input->post();
-						var_dump($params);
 
 					// Available
 			       		if(isset($params['available'])){
@@ -219,11 +218,32 @@ class Products extends CI_Controller
 			       		if($params['ownmaker'] != ''){
 			       			$params['maker'] = $params['ownmaker'];
 			       		}
-			       		if($params['maker']) = '0'{
-			       			$params['maker'] = $params['ownmaker'];
-			       		}
+
 			       		unset($params['ownmaker']);
 
+			       	// Update date
+			       		$now = new Datetime();
+						$now = $now->format('Y-m-d H-i-s');
+			       		$params['updatedate'] = $now;
+
+			       	// ID
+			       		$params['productID'] = $product->productID;
+
+				       	if($this->Products_model->update($params)){
+			       			$data['updated'] = true;
+
+			       			if($this->upload_images($params['productID']) == 0){
+			       				$data['uploaded'] = true;
+			       			}
+			       			else{
+				       			$data['uploaded'] = false;
+				       		}
+			       		}
+			       		else{
+			       			$data['updated'] = false;
+			       		}
+			       		$this->load->view('header',$data);
+						$this->load->view('productUpdate',$data);
 					}
 
 				}
@@ -237,7 +257,10 @@ class Products extends CI_Controller
 		$images = []; $errors = 0;
 
 	// Create folder for images storage
-		mkdir('assets\imgs\store\\'.$filename, 0755);
+		if(!is_dir('assets\imgs\store\\'.$filename)){
+			mkdir('assets\imgs\store\\'.$filename, 0755);
+			$errors++;
+		}
 		
 	// Set default upload config and load library
 		$config['upload_path'] = 'assets/imgs/store/'.$filename.'/';

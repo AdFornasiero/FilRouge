@@ -1,9 +1,9 @@
 <?php
 
 
-$referencePattern = '/^[\w\-]{6,12}$/'; // Entre 3 et 10 lettres, chiffres, tirets ou underscore
+$referencePattern = '/^[\w\-]{6,16}$/'; // Entre 6 et 16 lettres, chiffres, tirets ou underscore
 
-$labelPattern = '/^[0-9A-Za-z.-_áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ ]{0,24}$/'; // 2 à 24 chiffres ou lettres (+accents)(+tirets/underscores/espaces/points)
+$labelPattern = '/^[0-9A-Za-z.-_áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ ]{0,128}$/'; // 2 à 24 chiffres ou lettres (+accents)(+tirets/underscores/espaces/points)
 
 $globalPattern = '/^[0-9A-Za-záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ \.,?;:!§=+\-_°@()&\"\'\[\]\#\~²]{0,1030}$/'; // Lettres, mots, chiffres (max 1030)
 
@@ -114,18 +114,8 @@ $config = array(
 				'errors' => array('is_natural' => 'Entrez la quantité en stock',
 								'max_length' => 'Entrez la quantité en stock')
 
-		),
-
-		// AVAILABILITY DELAY
-		array(
-				'field' => 'availabilitydelay',
-				'label' => 'Délai de réapprovisionnement',
-				'rules' => array('is_natural',
-								'max_length[6]'),
-				'errors' => array('is_natural' => 'Entrez le délai en jours',
-								'max_length' => 'Entrez le délai en jours')
-
 		)
+
 
 	),
 
@@ -184,8 +174,8 @@ $config = array(
 				'label' => 'Fabriquant',
 				'rules' => array('max_length[128]',
 								'regex_match['.$labelPattern.']'),
-				'errors' => array('max_length' => 'Le nom du fabriquant semble incorrectgg',
-								'regex_match' => 'Le nom du fabriquant semble incorrectee')
+				'errors' => array('max_length' => 'Le nom du fabriquant semble incorrect',
+								'regex_match' => 'Le nom du fabriquant semble incorrect')
 		),
 
 		// PRICE
@@ -207,6 +197,17 @@ $config = array(
 								'max_length[10]'),
 				'errors' => array('is_natural' => 'Entrez la quantité en stock',
 								'max_length' => 'Entrez la quantité en stock')
+
+		),
+
+		// DISCOUNT
+		array(
+				'field' => 'discount',
+				'label' => 'Réduction',
+				'rules' => array('is_natural',
+								'less_than_equal_to[100]'),
+				'errors' => array('is_natural' => 'Entrez la réduction en %',
+								'less_than_equal_to' => 'Entrez la réduction en %tt')
 
 		)
 

@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-
 	$('.input-activator').click(function(){
 
 		if($('.input-collapse').css('display') == 'block'){
@@ -19,7 +18,5 @@ $(document).ready(function(){
 		$('.input-collapse').val('');
 	
 	});
-
-
 
 });
