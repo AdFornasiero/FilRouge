@@ -19,7 +19,20 @@ class Products extends CI_Controller
 
 			}
 			else{
-				$data['products'] = $this->Products_model->selectAll();
+				$products = $this->Products_model->selectAll();
+				$data['products'] = $products;
+
+				foreach($products as $product){
+					if(is_dir('assets/imgs/store/'.$product->productID)){
+						if(!empty(scandir('assets/imgs/store/'.$product->productID)[2])){
+							$image = base_url('assets/imgs/store/'.$product->productID.'/'.scandir('assets/imgs/store/'.$product->productID)[2]);
+							//$orientations[$product->productID] = $this->getOrientation($image);
+							$images[$product->productID] = $image;
+						}
+					}
+				}
+				$data['images'] = $images;
+				//$data['orientations'] = $orientations;
 
 			}
 
@@ -300,7 +313,8 @@ class Products extends CI_Controller
 
 // Define default image orientation
 	public function getOrientation($image){
-		switch(exif_read_data($image)['Orientation']){
+		if(pathinfo($image)['extension'] == 'jpg'){
+			switch(exif_read_data($image)['Orientation']){
 			case 1:
 				$imageOrientation = 0;
 				break;
@@ -315,9 +329,14 @@ class Products extends CI_Controller
 				break;
 			default:
 				$imageOrientation = 0;
-		}
+			}
 
-		return $imageOrientation;
+			return $imageOrientation;
+		}
+		else{
+			return 0;
+		}
+		
 	}
 
 

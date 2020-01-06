@@ -34,13 +34,12 @@
 
 			<?= form_close() ?>
 		</div>
-
 		<div class="w-full md:w-3/4 mx-1">
 			<?php foreach($products as $product): ?>
 				<a href="<?= site_url('Products/display/'. $product->productID) ?>">
 					<div class="flex w-full shadow my-2 p-1">
 						<div class="w-1/2 sm:w-1/3 lg:w-1/5 h-full rounded border-solid border-2 border-gray-300 h-64">
-					  		<img class=" object-cover" src="<?= base_url('assets/imgs/noimg.png') ?>" alt="No image">
+					  		<img class="object-cover" src="<?= (!empty($images[$product->productID])) ? $images[$product->productID] : base_url('assets/imgs/noimg.png') ?>" alt="No image">
 					  	</div>
 					  	<div class="w-1/2 sm:w-2/3 lg:w-4/5 truncate mx-4 my-2">
 					    	<div class="font-bold text-2xl"><?= $product->label ?></div>
