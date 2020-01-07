@@ -334,7 +334,7 @@ $config = array(
 	'signin' => array(
 
 		array(
-				'field' => 'email',
+				'field' => 'emaillog',
 				'label' => 'Adresse email',
 				'rules' => array('required',
 								'valid_email',
@@ -345,7 +345,7 @@ $config = array(
 		),
 		
 		array(
-				'field' => 'password',
+				'field' => 'passwordlog',
 				'label' => 'Mot de passe',
 				'rules' => array('required',
 								'callback_correct_password'),

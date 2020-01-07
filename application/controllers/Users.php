@@ -91,10 +91,10 @@ class Users extends CI_Controller
 //--------------------//
 
 		else if($this->input->post('signin')){
-
+			var_dump($this->input->post());
 			if($this->form_validation->run('signin')){
 				
-				$user = $this->Users_model->selectByEmail($this->input->post('email'));
+				$user = $this->Users_model->selectByEmail($this->input->post('emaillog'));
 
 		// Update last signin date
 				$this->Users_model->updateLastSignin($user->email);
@@ -125,7 +125,7 @@ class Users extends CI_Controller
 				$this->session->set_userdata($userdata);
 				redirect(site_url('Users/profile'));
 
-		// Check if user's admin
+		// Check if user is admin
 			if(isset($isAdmin) && $isAdmin)
 				$userdata['admin'] = true;
 
@@ -173,22 +173,9 @@ class Users extends CI_Controller
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-	public function exists_email(){
-
-		if(!empty($this->input->post('email'))){
-			if($this->Users_model->doesEmailExists($this->input->post('email'))){
+	public function exists_email($email){
+		if(!empty($email)){
+			if($this->Users_model->doesEmailExists($email)){
 				return true;
 			}
 			else{
@@ -197,18 +184,35 @@ class Users extends CI_Controller
 		}
 	}
 
-	public function correct_password(){
-
-		$logs = $this->Users_model->getLogs($this->input->post('email'));
-		if(!empty($logs) && !empty($this->input->post('password'))){
-			if(password_verify($this->input->post('password'), $logs->password)){
+	public function correct_password($password){
+		$logs = $this->Users_model->getLogs($this->input->post('emaillog'));
+		if(!empty($logs) && !empty($password)){
+			if(password_verify($password, $logs->password)){
 				return true;
 			}
 			else{
-				var_dump($this->input->post('password'));
 				return false;
 			}
 		}
+	}
+
+
+	public function ajax(){
+		$name = $this->input->post('fieldname');
+		$value = $this->input->post('fieldvalue');
+		unset($_POST);
+		$_POST[$name] = $value;
+		
+		if($this->form_validation->run('signin') == false){
+			if(!empty(form_error($name)))
+				echo $name.'|'.form_error($name);
+			else
+				echo '';
+		}
+		else{
+			echo '';
+		}
+
 	}
 }
 

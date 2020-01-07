@@ -50,7 +50,6 @@ class Users_model extends CI_Model
     public function getLogs($email){
         $this->db->where('email', $email);
         $this->db->select('email, password');
-
         return $this->db->get('users')->row();
     }
 

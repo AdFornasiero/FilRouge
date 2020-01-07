@@ -2,7 +2,7 @@
 
 	<?= validation_errors() ?>
 
-	<div class="tabs flex rounded-t">
+	<div class="tabs flex rounded-t text-lg font-semibold">
 	  	<button class="tablinks shadow-inner border-none w-1/2 <?= isset($focusOnSignin) ? 'active' : ''; ?>" id="signinbtn">Connexion</button>
 	  	<button class="tablinks shadow-inner border-none w-1/2" id="signupbtn">Inscription</button>
 	</div>
@@ -11,14 +11,15 @@
 	<div id="signin" class="tabcontent shadow-xl rounded-b">
 		<?= form_open('', array('class'=>'flex flex-col text-center rounded p-6')) ?>
 			<div class="mt-2">
-
-			 	<label class="block text-gray-500 font-semibold pr-3" for="email">Adresse email</label>
-				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded mt-1" type="text" name="email" id="email">
+			 	<label class="block text-gray-500 font-semibold pr-3" for="emaillog">Adresse email</label>
+				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded mt-1" type="text" name="emaillog" id="emaillog">
+				<span id="emaillogerror" class="hidden"></span>
 			</div>
 
 			<div class="mt-2">	
-			 	<label class=" text-gray-500 font-semibold pr-3" for="password">Mot de passe</label>
-				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded mt-1" type="text" name="password" id="password">
+			 	<label class=" text-gray-500 font-semibold pr-3" for="passwordlog">Mot de passe</label>
+				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded mt-1" type="text" name="passwordlog" id="passwordlog">
+				<span id="passwordlogerror" class="hidden"></span>
 			</div>
 			<?= form_submit('signin', 'Connexion', array('class' => 'mx-auto bg-gray-200 px-2 py-1 border-2 border-gray-300 rounded mt-4')); ?>
 			<a id="forgotpassword" class="text-right text-gray-400 font-semibold" href="<?= site_url('Users/forgot_password') ?>">Mot de passe oublié</a>
@@ -33,6 +34,7 @@
 			<div class="mt-3">	
 			 	<label class="block text-gray-500 font-semibold ml-2" for="email"><i class="fas fa-envelope"></i> Adresse email</label>
 				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded mt-1" type="text" name="email" id="email"  value="<?= set_value('email') ?>">
+				<span id="emailerror" class="invisible">Champ</span>
 			</div>
 
 			<div class="mt-3">	
@@ -93,3 +95,4 @@
 
 <script src="<?= base_url('assets/js/tabs.js') ?>"></script>
 <script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
+<script src="<?= base_url('assets/js/ajax-validation.js') ?>"></script>
