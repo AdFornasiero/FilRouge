@@ -45,7 +45,7 @@
 					    	<div class="font-bold text-2xl"><?= $product->label ?></div>
 					  		<div class="font-semibold text-sm"><?= $product->maker ?></div>
 						    <p class="hidden md:block text-gray-700 text-base"><?= $product->description ?></p>
-					  		<div class=""><?= $product->ptprice ?></div>
+					  		<div class=""><?= (isset($_SESSION['logged']) && $_SESSION['pro']) ? $product->ptprice : round($product->ptprice*1.20,2) ?></div>
 					  	</div>
 					</div>
 				</a>

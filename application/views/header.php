@@ -47,8 +47,10 @@
 		<div class="collapsible-profile hidden absolute flex right-0 text-center w-64 md:w-4/12 lg:w-3/12 m-2 pt-2 pb-4 shadow-2xl border border-gray-200 bg-white rounded">
 			<?php if(isset($_SESSION['logged'])){ ?>
 
-				<span class="collapsible-elem block text-xl font-bold text-gray-800"><?= $_SESSION['login'] ?></span>
-				<span class="collapsible-elem block text-sm text-gray-400 font-semibold">Connecté</span><br>
+				<a href="<?= site_url('Users/profile') ?>">
+					<span class="collapsible-elem block text-xl font-bold text-gray-800"><?= $_SESSION['login'] ?></span>
+					<span class="collapsible-elem block text-sm text-gray-400 font-semibold">Connecté</span><br>
+				</a>
 
 				<a href="<?= site_url('Users/logout') ?>" class="collapsible-elem m-auto bg-gray-300 border-2 border-gray-400 p-1 text-sm rounded">Se déconnecter</a>
 
@@ -60,10 +62,10 @@
 			<?php } ?>
 		</div>
 
-		<div class="collapsible-categories hidden absolute text-center w-auto m-2 p-2 pb-4 shadow-2xl border border-gray-200 text-sm bg-white rounded">
+		<div class="flex flex-wrap max-w-1/4 justify-around collapsible-categories hidden absolute text-center m-2 p-2 pb-4 shadow-lg border border-gray-200 text-sm bg-white rounded">
 			<?php 
 			foreach($this->Categories_model->selectParentsCategories() as $parent){ ?>
-				<div class="inline-block w-1/4 align-top text-left m-2">
+				<div class="inline-block align-top text-left m-2">
 					<span class="font-bold text-lg"><?= $parent->label ?></span>
 					<ul class="px-2 mt-1">
 						<?php $subCats = $this->Categories_model->selectSubCategories($parent->categoryID);

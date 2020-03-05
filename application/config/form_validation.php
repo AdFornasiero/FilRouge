@@ -352,46 +352,6 @@ $config = array(
 				'errors' => array('required' => 'Entrez votre mot de passe',
 								'correct_password' => 'Identifiant ou mot de passe incorrect')
 		)
-	),
-
-	'products/update' => array(
-
-		array(
-				'field' => 'label',
-				'label' => 'Libellé',
-				'rules' => ''
-
-		),
-		array(
-				'field' => 'reference',
-				'label' => 'Référence',
-				'rules' => ''
-
-		),
-		array(
-				'field' => 'supplier',
-				'label' => 'Fournisseur',
-				'rules' => ''
-
-		),
-		array(
-				'field' => 'description',
-				'label' => 'Description',
-				'rules' => ''
-
-		),
-		array(
-				'field' => 'maker',
-				'label' => 'Fabriquant',
-				'rules' => ''
-
-		),
-		array(
-				'field' => 'availabilitydelay',
-				'label' => 'Délai de réapprovisionnement',
-				'rules' => ''
-
-		)
 
 	)
 

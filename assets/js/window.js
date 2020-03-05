@@ -7,11 +7,11 @@ $(document).ready(function(){
 	$('.collapsible-profile').offset({top:profilePos.top+profileHeight+8});
 
 	$('#profile-toggler').hover(function(){
-		$('.collapsible-profile').slideDown(400,'swing');
+		$('.collapsible-profile').slideDown(250,'swing');
 	});
 
 	$('*').click(function(){
-		$('.collapsible-profile').slideUp(300,'swing');
+		$('.collapsible-profile').slideUp(250,'swing');
 	});
 
 	/*$('.collapsible-profile').mouseleave(function(){
@@ -41,6 +41,11 @@ $(document).ready(function(){
 
 	$('.collapsible-categories').mouseleave(function(){
 		$('.collapsible-categories').slideUp(400,'swing');
+	});
+
+	$('body').not('.collapsible-categories').click(function(){
+		console.log('y');
+		$('.collapsible-categories').slideUp(250,'swing');
 	});
 
 });

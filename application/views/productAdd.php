@@ -11,7 +11,7 @@ if(isset($uploaded) && !$uploaded){ ?>
 	</div>
 <?php } ?>
 
-
+<?= validation_errors() ?>
 <!--------------->
 <!-- FORM OPEN -->
 <!--------------->
@@ -24,7 +24,7 @@ if(isset($uploaded) && !$uploaded){ ?>
 	<!-------------->
 		<div class="md:flex mb-6">
 			<div class="md:w-1/4">
-				<label class="text-gray-500 font-bold pr-3 pl-1" for="label">Catégorie</label>
+				<label class="text-gray-500 font-semibold pr-3 pl-1" for="label">Catégorie*</label>
 			</div>
 			<div class="md:w-3/4">
 				<?= form_dropdown('category', $categoriesList,'', array('class'=>'w-full bg-gray-200 border-2 border-gray-300 rounded')) ?>
@@ -36,10 +36,11 @@ if(isset($uploaded) && !$uploaded){ ?>
 	<!------------->
 		<div class="md:flex mb-6">
 			<div class="md:w-1/4">
-				<label class="text-gray-500 font-bold pr-3 pl-1" for="label">Libellé</label>
+				<label class="text-gray-500 font-semibold pr-3 pl-1" for="label">Libellé*</label>
 			</div>
 			<div class="md:w-3/4">
 				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded" type="text" name="label" id="label" value="<?= (!isset($added)) ? set_value('label') : '' ?>">
+				<span id="labelerror" class="errorspan"><?= form_error('label') ?></span>
 			</div>
 		</div>
 
@@ -48,10 +49,11 @@ if(isset($uploaded) && !$uploaded){ ?>
 	<!----------------->
 		<div class="md:flex mb-6">
 			<div class="md:w-1/4">
-				<label class="text-gray-500 font-bold pr-3 pl-1" for="referenceInput">Référence</label>
+				<label class="text-gray-500 font-semibold pr-3 pl-1" for="reference">Référence*</label>
 			</div>
 			<div class="md:w-3/4">
-				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded" type="text" name="reference" id="referenceInput" value="<?= (!isset($added)) ? set_value('reference') : '' ?>">
+				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded" type="text" name="reference" id="reference" value="<?= (!isset($added)) ? set_value('reference') : '' ?>">
+				<span id="referenceerror" class="errorspan"><?= form_error('reference') ?></span>
 			<!--<button name="reference" value="Auto-générer" id="referenceButton">-->
 			</div>
 		</div>
@@ -61,7 +63,7 @@ if(isset($uploaded) && !$uploaded){ ?>
 	<!---------------->
 		<div class="md:flex mb-6">
 			<div class="md:w-1/4">
-				<label class="text-gray-500 font-bold pr-3 pl-1" for="label">Fournisseur</label>
+				<label class="text-gray-500 font-semibold pr-3 pl-1" for="label">Fournisseur*</label>
 				</div>
 			<div class="md:w-3/4">
 				<?= form_dropdown('supplierID', $suppliersList,set_value('supplierID'), array('class'=>'w-full bg-gray-200 border-2 border-gray-300 rounded')) ?>
@@ -73,10 +75,11 @@ if(isset($uploaded) && !$uploaded){ ?>
 	<!------------------->
 		<div class="md:flex mb-6">
 			<div class="md:w-1/4">
-				<label class="text-gray-500 font-bold pr-3 pl-1" for="description">Description</label>
+				<label class="text-gray-500 font-semibold pr-3 pl-1" for="description">Description</label>
 				</div>
 			<div class="md:w-3/4">
 				<textarea class="w-full bg-gray-200 border-2 border-gray-300 rounded" name="description" id="description"><?= (!isset($added)) ? set_value('description') : '' ?></textarea>
+				<span id="descriptionerror" class="errorspan"><?= form_error('description') ?></span>
 			</div>
 		</div>
 
@@ -85,12 +88,15 @@ if(isset($uploaded) && !$uploaded){ ?>
 	<!------------->
 		<div class="md:flex mb-1 h-full">
 			<div class="md:w-1/4">
-				<label class="text-gray-500 font-bold pr-3 pl-1" for="maker">Fabriquant</label>
+				<label class="text-gray-500 font-semibold pr-3 pl-1" for="maker">Fabriquant*</label>
 			</div>
-			<div class="md:w-3/4 w-full dropdown-collapse">
+			<div class="dropdown-collapse w-full md:w-3/4">
 				<?= form_dropdown('maker', $makersList,set_value('maker'), array('class'=>'w-full bg-gray-200 border-2 border-gray-300 rounded')) ?>
 			</div>
-			<input class="input-collapse hidden w-full md:w-3/4 bg-gray-200 border-2 border-gray-300 rounded" type="text", name="ownmaker", id="ptprice" value="<?= (!isset($added)) ? set_value('') : '' ?>">
+			<div class="input-collapse w-full md:w-3/4 hidden">
+				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded" type="text", name="ownmaker", id="ptprice" value="<?= (!isset($added)) ? set_value('') : '' ?>">
+				<span id="ownmakererror" class="errorspan"><?= form_error('ownmaker') ?></span>
+			</div>
 		</div>
 
 		<div class="block text-right text-gray-500 font-semibold mb-2">
@@ -103,15 +109,17 @@ if(isset($uploaded) && !$uploaded){ ?>
 	<!------------->
 		<div class="flex mb-5">
 			<div class="w-1/2 mr-1">
-				<label class="text-gray-500 font-bold pl-1" for="ptprice">Prix<span class="font-semibold text-xs"> hors-taxes</span></label>
+				<label class="text-gray-500 font-semibold pl-1" for="ptprice">Prix*<span class="font-semibold text-xs"> hors-taxes</span></label>
 				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded" type="text", name="ptprice", id="ptprice" value="<?= (!isset($added)) ?set_value('ptprice') : '' ?>">
+				<span id="ptpriceerror" class="errorspan"><?= form_error('ptprice') ?></span>
 			</div>
 	<!------------->
 	<!--  STOCK  -->
 	<!------------->
 			<div class="w-1/2 ml-1">
-				<label class="text-gray-500 font-bold pl-1" for="stock">En stock</label>
+				<label class="text-gray-500 font-semibold pl-1" for="stock">En stock</label>
 				<input class="w-full bg-gray-200 border-2 border-gray-300 rounded" type="text", name="stock", id="stock" value="<?= (!isset($added)) ? set_value('stock') : '' ?>">
+				<span id="stockerror" class="errorspan"><?= form_error('stock') ?></span>
 			</div>
 		</div>
 
@@ -120,14 +128,14 @@ if(isset($uploaded) && !$uploaded){ ?>
 	<!-------------->
 		<div class="flex mb-2">
 			<div class="w-2/3 md:w-3/4">
-				<label class="text-gray-500 font-bold pl-1" for="images">Images <span class="font-semibold text-xs"> png / jpg / gif</span><br><span id="filenumber" class="font-semibold text-sm"></span></label>
-				<?= form_upload('images[]','images',array('id' => 'images','multiple' => '','class' => 'img-upload hidden w-0')) ?>
+				<label class="text-gray-500 font-semibold pl-1" for="images">Images <span class="font-semibold text-xs"> png / jpg / gif</span><br><span id="filenumber" class="font-semibold text-sm"></span></label>
+				<?= form_upload('images[]','images',array('id' => 'images','accept' => 'image/png, image/jpeg, image/gif','multiple' => '','class' => 'img-upload hidden w-0')) ?>
 			</div>
 	<!----------------->
 	<!--  AVAILABLE  -->
 	<!----------------->
 			<div class="w-1/3 md:w-1/4">
-				<label class="text-gray-500 font-bold pr-3" for="available">Disponible</label>
+				<label class="text-gray-500 font-semibold pr-3" for="available">Disponible</label>
 				<input class="form-check-input" type="checkbox" name="available" id="available" checked>
 			</div>
 		</div>

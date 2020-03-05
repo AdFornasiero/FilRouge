@@ -129,6 +129,9 @@ class Products extends CI_Controller
 	       			$params['categoryID'] = $params['category'];
 	       			unset($params['category']);
 	       		}
+	       		else{
+	       			$errors++;
+	       		}
 
 	       	// Maker
 	       		if($params['ownmaker'] != ''){
@@ -136,6 +139,7 @@ class Products extends CI_Controller
 	       		}
 	       		unset($params['ownmaker']);
 
+	       	// Inserting in database
 	       		$insertedID = $this->Products_model->add($params);
 
 	       		if(isset($insertedID)){
@@ -151,6 +155,7 @@ class Products extends CI_Controller
 	       		else{
 	       			$data['added'] = false;
 	       		}
+
   	
 	       		$this->load->view('header', $data);
 				$this->load->view('productAdd', $data);

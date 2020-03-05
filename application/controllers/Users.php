@@ -8,7 +8,6 @@ class Users extends CI_Controller
 
 	public function sign(){
 
-
 	// Redirect user if already logged
 		if(isset($_SESSION['logged'])){
 			redirect(site_url('Users/profile'));
@@ -118,6 +117,7 @@ class Users extends CI_Controller
 							'phone' => $user->phone,
 							'birthdate' => $user->birthdate,
 							'lastsignindate' => $user->lastsignindate,
+							'signupdate' =>$user->signupdate,
 							'country' => $user->charcode,
 							'pro' => $pro
 				);
@@ -168,6 +168,8 @@ class Users extends CI_Controller
 
 	public function profile(){
 		$data['title'] = 'Mon compte';
+
+		//var_dump($_SESSION);
 		$this->load->view('header', $data);
 		$this->load->view('profile', $data);
 	}
